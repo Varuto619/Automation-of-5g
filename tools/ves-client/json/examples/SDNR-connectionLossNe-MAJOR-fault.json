@@ -1,0 +1,38 @@
+{
+    "event": {
+        "commonEventHeader": {
+            "domain": "fault",
+            "eventId": "virtual33.myguest.virtualbox.org_northbound-interface_connectionLossNe",
+            "eventName": "fault_ONAP_SDNR_Controller_Alarms_connectionLossNe",
+            "eventType": "ONAP_SDNR_Controller_Alarms",
+            "sequence": 0,
+            "priority": "High",
+            "reportingEntityId": "",
+            "reportingEntityName": "virtual33.myguest.virtualbox.org",
+            "sourceId": "",
+            "sourceName": "virtual33.myguest.virtualbox.org",
+            "startEpochMicrosec": 1742883475993080,
+            "lastEpochMicrosec": 1742883475993080,
+            "nfNamingCode": "SDNR",
+            "nfVendorName": "ONAP",
+            "timeZoneOffset": "+00:00",
+            "version": "4.1",
+            "vesEventListenerVersion": "7.2.1"
+        },
+        "faultFields": {
+            "faultFieldsVersion": "4.0",
+            "alarmCondition": "connectionLossNe",
+            "alarmInterfaceA": "northbound-interface",
+            "eventSourceType": "ONAP_SDNR_Controller",
+            "specificProblem": "connectionLossNe",
+            "eventSeverity": "MAJOR",
+            "vfStatus": "Active",
+            "alarmAdditionalInformation": {
+                "eventTime": "2025-03-25T06:17:55.993080Z",
+                "equipType": "SDNR",
+                "vendor": "ONAP",
+                "model": "ONAP Controller for Radio"
+            }
+        }
+    }
+}

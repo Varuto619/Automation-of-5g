@@ -1,0 +1,41 @@
+{
+  "event": {
+    "commonEventHeader": {
+      "domain": "stndDefined",
+      "eventId": "virtual33.myguest.virtualbox.org_northbound-interface_connectionLossNe",
+      "eventName": "stndDefined_ONAP_SDNR_Controller_Alarms_connectionLossNe",
+      "eventType": "ONAP_SDNR_Controller_Alarms",
+      "sequence": 0,
+      "priority": "Low",
+      "reportingEntityId": "",
+      "reportingEntityName": "virtual33.myguest.virtualbox.org",
+      "sourceId": "",
+      "sourceName": "virtual33.myguest.virtualbox.org",
+      "startEpochMicrosec": 1742883483045875,
+      "lastEpochMicrosec": 1742883483045875,
+      "nfNamingCode": "SDNR",
+      "nfVendorName": "ONAP",
+      "timeZoneOffset": "+00:00",
+      "version": "4.1",
+      "stndDefinedNamespace": "3GPP-FaultSupervision",
+      "vesEventListenerVersion": "7.2.1"
+    },
+    "stndDefinedFields": {
+      "schemaReference": "https://forge.3gpp.org/rep/sa5/MnS/raw/Rel-18/OpenAPI/TS28532_FaultMnS.yaml#components/schemas/NotifyClearedAlarm",
+      "data": {
+        "href": "href1",
+        "notificationId": 0,
+        "notificationType": "notifyClearedAlarm",
+        "eventTime": "2025-03-25T06:18:03.045875Z",
+        "systemDN": "xyz",
+        "alarmId": "connectionLossNe",
+        "alarmType": "COMMUNICATIONS_ALARM",
+        "probableCause": "connectionLossNe",
+        "perceivedSeverity": "MAJOR",
+        "clearUserId": "ONAP",
+        "clearSystemId": "ONAP"
+      },
+      "stndDefinedFieldsVersion": "1.0"
+    }
+  }
+}

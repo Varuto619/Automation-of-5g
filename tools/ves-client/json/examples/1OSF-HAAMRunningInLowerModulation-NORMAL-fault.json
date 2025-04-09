@@ -1,0 +1,38 @@
+{
+    "event": {
+        "commonEventHeader": {
+            "domain": "fault",
+            "eventId": "__HAAMRunningInLowerModulation",
+            "eventName": "fault_O_RAN_COMPONENT_Alarms_HAAMRunningInLowerModulation",
+            "eventType": "O_RAN_COMPONENT_Alarms",
+            "sequence": 0,
+            "priority": "High",
+            "reportingEntityId": "",
+            "reportingEntityName": "virtual33.myguest.virtualbox.org",
+            "sourceId": "",
+            "sourceName": "",
+            "startEpochMicrosec": 1742883476699985,
+            "lastEpochMicrosec": 1742883476699985,
+            "nfNamingCode": "1OSF",
+            "nfVendorName": "",
+            "timeZoneOffset": "+00:00",
+            "version": "4.1",
+            "vesEventListenerVersion": "7.2.1"
+        },
+        "faultFields": {
+            "faultFieldsVersion": "4.0",
+            "alarmCondition": "HAAMRunningInLowerModulation",
+            "alarmInterfaceA": "",
+            "eventSourceType": "O_RAN_COMPONENT",
+            "specificProblem": "HAAMRunningInLowerModulation",
+            "eventSeverity": "NORMAL",
+            "vfStatus": "Active",
+            "alarmAdditionalInformation": {
+                "eventTime": "2025-03-25T06:17:56.699985Z",
+                "equipType": "1OSF",
+                "vendor": "",
+                "model": ""
+            }
+        }
+    }
+}

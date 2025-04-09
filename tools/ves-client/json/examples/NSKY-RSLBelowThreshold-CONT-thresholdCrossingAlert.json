@@ -1,0 +1,50 @@
+{
+    "event": {
+        "commonEventHeader": {
+            "domain": "thresholdCrossingAlert",
+            "eventId": "O-RAN-FH-IPv6-01_4af8681f-f2e4-4058-8052-4e9343ee7bf2_RSLBelowThreshold",
+            "eventName": "thresholdCrossingAlert_O_RAN_COMPONENT_TCA_RSLBelowThreshold",
+            "eventType": "O_RAN_COMPONENT_TCA",
+            "sequence": 0,
+            "priority": "High",
+            "reportingEntityId": "",
+            "reportingEntityName": "virtual33.myguest.virtualbox.org",
+            "sourceId": "",
+            "sourceName": "O-RAN-FH-IPv6-01",
+            "startEpochMicrosec": 1742883483671329,
+            "lastEpochMicrosec": 1742883483671329,
+            "nfNamingCode": "NSKY",
+            "nfVendorName": "VENDORC",
+            "timeZoneOffset": "+00:00",
+            "version": "4.1",
+            "vesEventListenerVersion": "7.2.1"
+        },
+        "thresholdCrossingAlertFields": {
+            "thresholdCrossingFieldsVersion": "4.0",
+            "additionalParameters": [{
+                "criticality": "MAJ",
+                "hashMap": { "additionalProperties": "up-and-down" },
+                "thresholdCrossed": "packetLoss"
+            }],
+            "alertAction": "CONT",
+            "alertDescription": "TCA",
+            "alertType": "INTERFACE-ANOMALY",
+            "alertValue": "NSKY",
+            "associatedAlertIdList": ["loss-of-signal"],
+            "collectionTimestamp": "Tue, 25 Mar 2025 06:18:03 +0000",
+            "dataCollector": "data-lake",
+            "elementType": "NSKY",
+            "eventSeverity": "WARNING",
+            "eventStartTimestamp": "Tue, 25 Mar 2025 06:15:00 +0000",
+            "interfaceName": "4af8681f-f2e4-4058-8052-4e9343ee7bf2",
+            "networkService": "from-a-to-b",
+            "possibleRootCause": "always-the-others",
+            "additionalFields": {
+                "eventTime": "2025-03-25T06:18:03.671329Z",
+                "equipType": "NSKY",
+                "vendor": "VENDORC",
+                "model": "TheSkyIsTheLimit"
+            }
+        }
+    }
+}

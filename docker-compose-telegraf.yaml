@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: GPL-2.0-only
+
+networks:
+  smo:
+    external: true
+    name: smo
+
+services:
+  telegraf:
+    image: $TELEGRAF_IMAGE
+    container_name: telegraf
+    environment:
+      INFLUXDB_V2_TOKEN: $INFLUXDB2_TOKEN
+    volumes:
+      - ./config/telegraf/oam-telegraf.conf:/etc/telegraf/telegraf.conf
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    command: --watch-config poll
+    ports:
+      - 8125:8125
+    networks:
+      smo:

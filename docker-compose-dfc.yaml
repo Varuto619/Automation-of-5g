@@ -1,0 +1,40 @@
+# SPDX-License-Identifier: GPL-2.0-only
+
+networks:
+  smo:
+    external: true
+
+services:
+  auth-token-file-dfc:
+    image: $AUTH_TOKEN_IMAGE
+    environment:
+      - CREDS_GRANT_TYPE=client_credentials
+      - CREDS_CLIENT_SECRET=$DFC_CLIENT_SECRET
+      - CREDS_CLIENT_ID=dfc
+      - AUTH_SERVICE_URL=http://keycloak:8080/realms/nonrtric-realm/protocol/openid-connect/token
+      - OUTPUT_FILE=/token-cache/jwt.txt
+    volumes:
+    - ./config/dfc/token-cache:/token-cache
+    labels:
+      - "ranpm=yes"
+    networks:
+      smo:
+
+  dfc:
+    container_name: dfc
+    user: root
+    image: $DFC_IMAGE
+    ports:
+    - 8433:8433
+    volumes:
+    - ./config/dfc/application.yaml:/opt/app/datafile/config/application.yaml
+    - ./config/dfc/truststore.jks:/opt/app/datafile/config/truststore.jks
+    - ./shared-volume:/tmp/onap_datafile/
+    - ./config/dfc/token-cache:/token-cache
+    # truststore is updated in runtime
+    depends_on:
+      - auth-token-file-dfc
+    labels:
+      - "ranpm=yes"
+    networks:
+      smo:

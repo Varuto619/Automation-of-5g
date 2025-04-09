@@ -1,0 +1,16 @@
+# SPDX-License-Identifier: GPL-2.0-only
+
+networks:
+  smo:
+    external: true
+    name: smo
+
+services:
+  influxdb_cli: 
+    image: $INFLUXDB_IMAGE
+    container_name: influxdb_cli
+    environment:
+      INFLUXDB2_TOKEN: $INFLUXDB2_TOKEN
+    entrypoint: influx bucket create --skip-verify --name $TELEGRAF_INSTANCE --retention 30d --org $INFLUXDB2_ORG --host http://$INFLUXDB2_INSTANCE:8086 --token $INFLUXDB2_TOKEN
+    networks:
+      smo:

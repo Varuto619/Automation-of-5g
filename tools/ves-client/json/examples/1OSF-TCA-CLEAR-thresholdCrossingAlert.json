@@ -1,0 +1,50 @@
+{
+    "event": {
+        "commonEventHeader": {
+            "domain": "thresholdCrossingAlert",
+            "eventId": "__TCA",
+            "eventName": "thresholdCrossingAlert_O_RAN_COMPONENT_TCA_TCA",
+            "eventType": "O_RAN_COMPONENT_TCA",
+            "sequence": 0,
+            "priority": "High",
+            "reportingEntityId": "",
+            "reportingEntityName": "virtual33.myguest.virtualbox.org",
+            "sourceId": "",
+            "sourceName": "",
+            "startEpochMicrosec": 1742883484515306,
+            "lastEpochMicrosec": 1742883484515306,
+            "nfNamingCode": "1OSF",
+            "nfVendorName": "",
+            "timeZoneOffset": "+00:00",
+            "version": "4.1",
+            "vesEventListenerVersion": "7.2.1"
+        },
+        "thresholdCrossingAlertFields": {
+            "thresholdCrossingFieldsVersion": "4.0",
+            "additionalParameters": [{
+                "criticality": "MAJ",
+                "hashMap": { "additionalProperties": "up-and-down" },
+                "thresholdCrossed": "packetLoss"
+            }],
+            "alertAction": "CLEAR",
+            "alertDescription": "TCA",
+            "alertType": "INTERFACE-ANOMALY",
+            "alertValue": "1OSF",
+            "associatedAlertIdList": ["loss-of-signal"],
+            "collectionTimestamp": "Tue, 25 Mar 2025 06:18:04 +0000",
+            "dataCollector": "data-lake",
+            "elementType": "1OSF",
+            "eventSeverity": "NORMAL",
+            "eventStartTimestamp": "Tue, 25 Mar 2025 06:15:00 +0000",
+            "interfaceName": "",
+            "networkService": "from-a-to-b",
+            "possibleRootCause": "always-the-others",
+            "additionalFields": {
+                "eventTime": "2025-03-25T06:18:04.515306Z",
+                "equipType": "1OSF",
+                "vendor": "",
+                "model": ""
+            }
+        }
+    }
+}

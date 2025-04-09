@@ -1,0 +1,41 @@
+{
+  "event": {
+    "commonEventHeader": {
+      "domain": "stndDefined",
+      "eventId": "PRTNILACQ01M017DEV01_4af8681f-f2e4-4058-8052-4e9343ee7bf2_signalIsLost",
+      "eventName": "stndDefined_O_RAN_COMPONENT_Alarms_signalIsLost",
+      "eventType": "O_RAN_COMPONENT_Alarms",
+      "sequence": 0,
+      "priority": "Low",
+      "reportingEntityId": "",
+      "reportingEntityName": "virtual33.myguest.virtualbox.org",
+      "sourceId": "",
+      "sourceName": "PRTNILACQ01M017DEV01",
+      "startEpochMicrosec": 1742883482333216,
+      "lastEpochMicrosec": 1742883482333216,
+      "nfNamingCode": "7DEV",
+      "nfVendorName": "VENDORB",
+      "timeZoneOffset": "+00:00",
+      "version": "4.1",
+      "stndDefinedNamespace": "3GPP-FaultSupervision",
+      "vesEventListenerVersion": "7.2.1"
+    },
+    "stndDefinedFields": {
+      "schemaReference": "https://forge.3gpp.org/rep/sa5/MnS/raw/Rel-18/OpenAPI/TS28532_FaultMnS.yaml#components/schemas/NotifyClearedAlarm",
+      "data": {
+        "href": "href1",
+        "notificationId": 0,
+        "notificationType": "notifyClearedAlarm",
+        "eventTime": "2025-03-25T06:18:02.333216Z",
+        "systemDN": "xyz",
+        "alarmId": "signalIsLost",
+        "alarmType": "COMMUNICATIONS_ALARM",
+        "probableCause": "signalIsLost",
+        "perceivedSeverity": "CRITICAL",
+        "clearUserId": "VENDORB",
+        "clearSystemId": "VENDORB"
+      },
+      "stndDefinedFieldsVersion": "1.0"
+    }
+  }
+}
