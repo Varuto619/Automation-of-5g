@@ -1,0 +1,39 @@
+---
+- name: Read the content of /etc/hosts
+  ansible.builtin.slurp:
+    src: /etc/hosts
+  register: hosts_file_content
+
+- name: Add comment before SMO OAM entries
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    line: "# SMO OAM development system"
+    state: present
+    insertafter: '^127.0.1.1'  # This ensures the comment is added after the second line
+
+- name: Add required entries to /etc/hosts
+  ansible.builtin.lineinfile:
+    path: /etc/hosts
+    line: "{{ ansible_host }} {{ item }}"
+    state: present
+  loop:
+    - "{{ domain_name }}"
+    - "gateway.{{ domain_name }}"
+    - "identity.{{ domain_name }}"
+    - "messages.{{ domain_name }}"
+    - "kafka-bridge.{{ domain_name }}"
+    - "kafka-ui.{{ domain_name }}"  
+    - "odlux.oam.{{ domain_name }}"
+    - "flows.oam.{{ domain_name }}"
+    - "tests.oam.{{ domain_name }}"
+    - "controller.dcn.{{ domain_name }}"
+    - "ves-collector.dcn.{{ domain_name }}"
+    - "minio.{{ domain_name }}"
+    - "redpanda.{{ domain_name }}"
+    - "nrtcp.{{ domain_name }}"
+
+- name: Update environment variables in .env files
+  ansible.builtin.replace:
+    path: "{{ repo_dest }}/.env"
+    regexp: '^HOST_IP=.*$'  # This allows for spaces around the '='
+    replace: "HOST_IP={{ ansible_host }}"

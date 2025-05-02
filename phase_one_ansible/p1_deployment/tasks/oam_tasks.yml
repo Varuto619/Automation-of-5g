@@ -1,0 +1,118 @@
+---
+- name: Ensure VES client scripts directory exists
+  ansible.builtin.file:
+    path: "{{ ves_client_path }}"
+    state: directory
+    mode: '0755'
+
+- name: Ensure VES scripts are executable
+  ansible.builtin.file:
+    path: "{{ ves_client_path }}/{{ item }}"
+    mode: '0755'
+  loop:
+    - _example.sh
+    - faults.sh
+    - pnfRegister.sh
+    - send15minPm.sh
+    - sendFault.sh
+    - sendStndDefinedHeartbeat.sh
+    - sendStndDefinedNotifyAlarm.sh
+    - sendStndDefinedNotifyFileReady.sh
+    - sendStndDefinedO1NotifyPnfRegistration.sh
+    - sendTca.sh
+  failed_when: false  # Continue if a script is missing to allow debugging
+
+- name: Run example.sh script
+  ansible.builtin.command:
+    cmd: "{{ ves_client_path }}/_example.sh"
+    chdir: "{{ ves_client_path }}"
+  register: example_result
+  environment:
+    PATH: "{{ ansible_env.PATH }}:/usr/local/bin:{{ ves_client_path }}"
+  changed_when: example_result.rc == 0
+  failed_when: example_result.rc != 0 and 'No such file or directory' not in example_result.stderr
+
+- name: Run faults.sh script
+  ansible.builtin.command:
+    cmd: "{{ ves_client_path }}/faults.sh"
+    chdir: "{{ ves_client_path }}"
+  register: faults_result
+  environment:
+    PATH: "{{ ansible_env.PATH }}:/usr/local/bin:{{ ves_client_path }}"
+  changed_when: faults_result.rc == 0
+  failed_when: faults_result.rc != 0 and 'No such file or directory' not in faults_result.stderr
+
+- name: List Kafka topics
+  ansible.builtin.command:
+    cmd: docker exec common-kafka-1-1 /opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9092 --list
+  register: kafka_topics
+  changed_when: false  # Read-only operation
+  failed_when: kafka_topics.rc != 0 and 'Error' not in kafka_topics.stderr
+
+- name: Show Kafka topics
+  ansible.builtin.debug:
+    var: kafka_topics.stdout_lines
+  when: kafka_topics.stdout_lines | length > 0
+
+- name: Check if Kafka topics exist
+  ansible.builtin.debug:
+    msg: "Kafka topic {{ item }} exists."
+  loop: "{{ kafka_topics.stdout_lines }}"
+  when: kafka_topics.stdout_lines | length > 0
+
+- name: Check O-DU and O-RU connection status in ODLUX
+  ansible.builtin.uri:
+    url: https://odlux.oam.varun.internship.org/rests/operations/data-provider:read-network-element-connection-list
+    method: POST
+    user: admin
+    password: Kp8bJ4SXszM0WXlhak3eHlcse2gAw84vaoGGmJvUy2U
+    body_format: json
+    body:
+      input:
+        pagination:
+          page: 1
+          size: 10
+    headers:
+      Content-Type: application/json
+    validate_certs: false
+    return_content: true
+    status_code: 200
+  register: odu_oru_status
+  retries: 3
+  delay: 5
+  until: odu_oru_status.status == 200
+
+- name: Debug raw O-DU and O-RU API response
+  ansible.builtin.debug:
+    var: odu_oru_status.json
+  when: odu_oru_status.json is defined
+
+- name: Show O-DU and O-RU connection status
+  ansible.builtin.debug:
+    var: odu_oru_status.json
+
+- name: Check fault messages in ODLUX
+  ansible.builtin.uri:
+    url: https://odlux.oam.varun.internship.org/rests/operations/data-provider:read-faultcurrent-list
+    method: POST
+    user: admin
+    password: Kp8bJ4SXszM0WXlhak3eHlcse2gAw84vaoGGmJvUy2U
+    body_format: json
+    body:
+      input:
+        pagination:
+          page: 1
+          size: 10
+    headers:
+      Content-Type: application/json
+    validate_certs: false
+    return_content: true
+    status_code: 200
+  register: odlux_faults
+  retries: 3
+  delay: 5
+  until: odlux_faults.status == 200
+
+- name: Show parsed fault message JSON
+  ansible.builtin.debug:
+    var: odlux_faults.json

@@ -1,0 +1,10 @@
+---
+repo_url: "https://github.com/Varuto619/Automation-of-5g.git"
+repo_dest: "/opt/Automation-of-5g"
+domain_name: "varun.internship.org"
+python_packages:
+  - jproperties
+
+ntsim_path: "{{ repo_dest }}/tools/ntsim"
+ntsim_enabled: true
+ves_client_path: "{{ repo_dest }}/tools/ves-client"

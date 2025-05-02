@@ -1,0 +1,32 @@
+---
+- name: Update package cache
+  ansible.builtin.apt:
+    update_cache: yes
+
+- name: Install required packages
+  ansible.builtin.package:
+    name:
+      - git
+      - python3
+      - python3-pip
+      - jq
+      - openjdk-11-jdk
+    state: present
+
+- name: Install Python packages
+  pip:
+    name: "{{ python_packages }}"
+    executable: pip3
+
+- name: Clone the repository
+  ansible.builtin.git:
+    repo: "{{ repo_url }}"
+    dest: "{{ repo_dest }}"
+    update: yes
+    force: yes
+
+- name: Add Python warnings to bashrc
+  ansible.builtin.lineinfile:
+    path: ~/.bashrc
+    line: 'export PYTHONWARNINGS="ignore:Unverified HTTPS request"'
+    state: present

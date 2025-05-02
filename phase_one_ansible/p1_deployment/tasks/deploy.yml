@@ -1,0 +1,38 @@
+---
+
+- name: Install jinja2 Python module
+  ansible.builtin.pip:
+    name: jinja2
+    state: present
+    executable: pip3  # Use pip3 for Python 3
+
+- name: Run adapt_to_environment executable
+  ansible.builtin.command:
+    cmd: "./adapt_to_environment -i {{ ansible_host }} -d {{ domain_name }}"
+    chdir: "{{ repo_dest }}"
+
+- name: Run docker-setup.sh script
+  ansible.builtin.command:
+    cmd: "./docker-setup.sh"
+    chdir: "{{ repo_dest }}"
+
+- name: Deploy NTSIM containers
+  ansible.builtin.shell: |
+    docker compose -f docker-compose.yaml up -d
+  args:
+    chdir: "{{ ntsim_path }}"
+  when: ntsim_enabled | default(true)
+
+- name: Restart O-DU container
+  ansible.builtin.shell: |
+    docker compose -f docker-compose.yaml restart ntsim-ng-o-du-1122
+  args:
+    chdir: "{{ ntsim_path }}"
+  when: ntsim_enabled | default(true)
+
+- name: Run NTSIM config.py script
+  ansible.builtin.shell: python3 config.py
+  args:
+    chdir: "{{ ntsim_path }}"
+  when: ntsim_enabled | default(true)
+

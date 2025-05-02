@@ -1,0 +1,1216 @@
+
+PLAY [all] *********************************************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [node1]
+
+TASK [p1_deployment : Include prerequisites] ***********************************
+included: /home/vboxuser2/phase_one_ansible/p1_deployment/tasks/prerequisites.yml for node1
+
+TASK [p1_deployment : Update package cache] ************************************
+changed: [node1]
+
+TASK [p1_deployment : Install required packages] *******************************
+ok: [node1]
+
+TASK [p1_deployment : Install Python packages] *********************************
+ok: [node1]
+
+TASK [p1_deployment : Clone the repository] ************************************
+changed: [node1]
+
+TASK [p1_deployment : Add Python warnings to bashrc] ***************************
+ok: [node1]
+
+TASK [p1_deployment : Configure /etc/hosts] ************************************
+included: /home/vboxuser2/phase_one_ansible/p1_deployment/tasks/configure_hosts.yml for node1
+
+TASK [p1_deployment : Read the content of /etc/hosts] **************************
+ok: [node1]
+
+TASK [p1_deployment : Add comment before SMO OAM entries] **********************
+ok: [node1]
+
+TASK [p1_deployment : Add required entries to /etc/hosts] **********************
+ok: [node1] => (item=varun.internship.org)
+ok: [node1] => (item=gateway.varun.internship.org)
+ok: [node1] => (item=identity.varun.internship.org)
+ok: [node1] => (item=messages.varun.internship.org)
+ok: [node1] => (item=kafka-bridge.varun.internship.org)
+ok: [node1] => (item=kafka-ui.varun.internship.org)
+ok: [node1] => (item=odlux.oam.varun.internship.org)
+ok: [node1] => (item=flows.oam.varun.internship.org)
+ok: [node1] => (item=tests.oam.varun.internship.org)
+ok: [node1] => (item=controller.dcn.varun.internship.org)
+ok: [node1] => (item=ves-collector.dcn.varun.internship.org)
+ok: [node1] => (item=minio.varun.internship.org)
+ok: [node1] => (item=redpanda.varun.internship.org)
+ok: [node1] => (item=nrtcp.varun.internship.org)
+
+TASK [p1_deployment : Update environment variables in .env files] **************
+ok: [node1]
+
+TASK [p1_deployment : Deploy the solution] *************************************
+included: /home/vboxuser2/phase_one_ansible/p1_deployment/tasks/deploy.yml for node1
+
+TASK [p1_deployment : Install jinja2 Python module] ****************************
+ok: [node1]
+
+TASK [p1_deployment : Run adapt_to_environment executable] *********************
+changed: [node1]
+
+TASK [p1_deployment : Run docker-setup.sh script] ******************************
+changed: [node1]
+
+TASK [p1_deployment : Deploy NTSIM containers] *********************************
+changed: [node1]
+
+TASK [p1_deployment : Restart O-DU container] **********************************
+changed: [node1]
+
+TASK [p1_deployment : Run NTSIM config.py script] ******************************
+changed: [node1]
+
+TASK [p1_deployment : Automate OAM message tasks] ******************************
+included: /home/vboxuser2/phase_one_ansible/p1_deployment/tasks/oam_tasks.yml for node1
+
+TASK [p1_deployment : Ensure VES client scripts directory exists] **************
+ok: [node1]
+
+TASK [p1_deployment : Ensure VES scripts are executable] ***********************
+ok: [node1] => (item=_example.sh)
+ok: [node1] => (item=faults.sh)
+ok: [node1] => (item=pnfRegister.sh)
+ok: [node1] => (item=send15minPm.sh)
+ok: [node1] => (item=sendFault.sh)
+ok: [node1] => (item=sendStndDefinedHeartbeat.sh)
+ok: [node1] => (item=sendStndDefinedNotifyAlarm.sh)
+ok: [node1] => (item=sendStndDefinedNotifyFileReady.sh)
+ok: [node1] => (item=sendStndDefinedO1NotifyPnfRegistration.sh)
+ok: [node1] => (item=sendTca.sh)
+
+TASK [p1_deployment : Run example.sh script] ***********************************
+changed: [node1]
+
+TASK [p1_deployment : Run faults.sh script] ************************************
+changed: [node1]
+
+TASK [p1_deployment : List Kafka topics] ***************************************
+ok: [node1]
+
+TASK [p1_deployment : Show Kafka topics] ***************************************
+ok: [node1] => {
+    "kafka_topics.stdout_lines": [
+        "DCAE-SE-COLLECTOR-EVENTS-DEV",
+        "__consumer_offsets",
+        "collected-file",
+        "file-ready",
+        "json-file-ready-kp",
+        "json-file-ready-kpadp",
+        "pmreports",
+        "unauthenticated.SEC_3GPP_FAULTSUPERVISION_OUTPUT",
+        "unauthenticated.SEC_FAULT_OUTPUT",
+        "unauthenticated.VES_FILE_READY_OUTPUT",
+        "unauthenticated.VES_MEASUREMENT_OUTPUT",
+        "unauthenticated.VES_O1_NOTIFY_PNF_REGISTRATION_OUTPUT",
+        "unauthenticated.VES_PNFREG_OUTPUT"
+    ]
+}
+
+TASK [p1_deployment : Check if Kafka topics exist] *****************************
+ok: [node1] => (item=DCAE-SE-COLLECTOR-EVENTS-DEV) => {
+    "msg": "Kafka topic DCAE-SE-COLLECTOR-EVENTS-DEV exists."
+}
+ok: [node1] => (item=__consumer_offsets) => {
+    "msg": "Kafka topic __consumer_offsets exists."
+}
+ok: [node1] => (item=collected-file) => {
+    "msg": "Kafka topic collected-file exists."
+}
+ok: [node1] => (item=file-ready) => {
+    "msg": "Kafka topic file-ready exists."
+}
+ok: [node1] => (item=json-file-ready-kp) => {
+    "msg": "Kafka topic json-file-ready-kp exists."
+}
+ok: [node1] => (item=json-file-ready-kpadp) => {
+    "msg": "Kafka topic json-file-ready-kpadp exists."
+}
+ok: [node1] => (item=pmreports) => {
+    "msg": "Kafka topic pmreports exists."
+}
+ok: [node1] => (item=unauthenticated.SEC_3GPP_FAULTSUPERVISION_OUTPUT) => {
+    "msg": "Kafka topic unauthenticated.SEC_3GPP_FAULTSUPERVISION_OUTPUT exists."
+}
+ok: [node1] => (item=unauthenticated.SEC_FAULT_OUTPUT) => {
+    "msg": "Kafka topic unauthenticated.SEC_FAULT_OUTPUT exists."
+}
+ok: [node1] => (item=unauthenticated.VES_FILE_READY_OUTPUT) => {
+    "msg": "Kafka topic unauthenticated.VES_FILE_READY_OUTPUT exists."
+}
+ok: [node1] => (item=unauthenticated.VES_MEASUREMENT_OUTPUT) => {
+    "msg": "Kafka topic unauthenticated.VES_MEASUREMENT_OUTPUT exists."
+}
+ok: [node1] => (item=unauthenticated.VES_O1_NOTIFY_PNF_REGISTRATION_OUTPUT) => {
+    "msg": "Kafka topic unauthenticated.VES_O1_NOTIFY_PNF_REGISTRATION_OUTPUT exists."
+}
+ok: [node1] => (item=unauthenticated.VES_PNFREG_OUTPUT) => {
+    "msg": "Kafka topic unauthenticated.VES_PNFREG_OUTPUT exists."
+}
+
+TASK [p1_deployment : Check O-DU and O-RU connection status in ODLUX] **********
+ok: [node1]
+
+TASK [p1_deployment : Debug raw O-DU and O-RU API response] ********************
+ok: [node1] => {
+    "odu_oru_status.json": {
+        "data-provider:output": {
+            "data": [
+                {
+                    "core-model-capability": "Unsupported",
+                    "device-type": "O-RAN",
+                    "host": "172.19.0.2",
+                    "id": "O-RU-11221",
+                    "is-required": false,
+                    "node-details": {
+                        "available-capabilities": [
+                            "(urn:o-ran:performance-management:1.0?revision=2022-08-15)o-ran-performance-management",
+                            "urn:ietf:params:netconf:capability:candidate:1.0",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tls-server?revision=2019-07-02)ietf-tls-server",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-metadata?revision=2016-08-05)ietf-yang-metadata",
+                            "urn:ietf:params:netconf:capability:xpath:1.0",
+                            "(urn:o-ran:ald:1.0?revision=2021-12-01)o-ran-ald",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-types?revision=2013-07-15)ietf-yang-types",
+                            "(urn:o-ran:dhcp:1.0?revision=2022-08-15)o-ran-dhcp",
+                            "(urn:ietf:params:xml:ns:yang:ietf-interfaces?revision=2018-02-20)ietf-interfaces",
+                            "(urn:o-ran:external-io:1.0?revision=2019-07-03)o-ran-externalio",
+                            "(urn:ietf:params:xml:ns:yang:ietf-crypto-types?revision=2019-07-02)ietf-crypto-types",
+                            "urn:ietf:params:netconf:capability:interleave:1.0",
+                            "(urn:o-ran:message5:1.0?revision=2021-12-01)o-ran-ecpri-delay",
+                            "(urn:o-ran:sync:1.0?revision=2022-08-15)o-ran-sync",
+                            "(urn:ietf:params:xml:ns:yang:iana-if-type?revision=2017-01-19)iana-if-type",
+                            "(urn:o-ran:interfaces:1.0?revision=2021-12-01)o-ran-interfaces",
+                            "(urn:ietf:params:xml:ns:yang:ietf-truststore?revision=2019-07-02)ietf-truststore",
+                            "(urn:ietf:params:xml:ns:yang:ietf-crypto-types?revision=2019-04-29)ietf-crypto-types",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tcp-server?revision=2019-07-02)ietf-tcp-server",
+                            "urn:ietf:params:netconf:capability:rollback-on-error:1.0",
+                            "(urn:o-ran:delay:1.0?revision=2022-08-15)o-ran-delay-management",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-notifications?revision=2012-02-06)ietf-netconf-notifications",
+                            "(urn:o-ran:wg4feat:1.0?revision=2022-12-05)o-ran-wg4-features",
+                            "urn:ietf:params:netconf:capability:yang-library:1.1?revision=2019-01-04&content-id=88",
+                            "urn:ietf:params:netconf:capability:with-defaults:1.0?basic-mode=explicit&also-supported=report-all,report-all-tagged,trim,explicit",
+                            "(urn:ietf:params:xml:ns:yang:ietf-dhcpv6-common?revision=2021-01-29)ietf-dhcpv6-common",
+                            "(urn:ieee:std:802.1Q:yang:ieee802-types?revision=2020-06-04)ieee802-types",
+                            "(urn:ietf:params:xml:ns:yang:ietf-system?revision=2014-08-06)ietf-system",
+                            "(urn:o-ran:transceiver:1.0?revision=2022-12-05)o-ran-transceiver",
+                            "(urn:ietf:params:xml:ns:yang:ietf-hardware?revision=2018-03-13)ietf-hardware",
+                            "urn:ietf:params:netconf:capability:startup:1.0",
+                            "(urn:o-ran:fm:1.0?revision=2022-08-15)o-ran-fm",
+                            "(urn:ietf:params:xml:ns:yang:ietf-network-instance?revision=2019-01-21)ietf-network-instance",
+                            "(urn:o-ran:beamforming:1.0?revision=2022-12-05)o-ran-beamforming",
+                            "(urn:o-ran:software-management:1.0?revision=2022-12-05)o-ran-software-management",
+                            "(urn:o-ran:module-cap:1.0?revision=2022-12-05)o-ran-module-cap",
+                            "(urn:ietf:params:xml:ns:yang:ietf-inet-types?revision=2013-07-15)ietf-inet-types",
+                            "(urn:ietf:params:xml:ns:yang:ietf-dhcpv6-types?revision=2018-09-04)ietf-dhcpv6-types",
+                            "(urn:o-ran:wg1identityref:1.0?revision=2022-08-15)o-ran-common-identity-refs",
+                            "(urn:o-ran:mplane-interfaces:1.0?revision=2021-12-01)o-ran-mplane-int",
+                            "(urn:ietf:params:xml:ns:yang:ietf-datastores?revision=2018-02-14)ietf-datastores",
+                            "(urn:o-ran:udpecho:1.0?revision=2019-02-04)o-ran-udp-echo",
+                            "(urn:ietf:params:xml:ns:netmod:notification?revision=2008-07-14)nc-notifications",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tls-common?revision=2019-07-02)ietf-tls-common",
+                            "(urn:ietf:params:xml:ns:yang:iana-hardware?revision=2018-03-13)iana-hardware",
+                            "(urn:o-ran-sc:params:xml:ns:yang:nts:network:function?revision=2021-06-18)nts-network-function",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-with-defaults?revision=2011-06-01)ietf-netconf-with-defaults",
+                            "(urn:ietf:params:xml:ns:yang:ietf-origin?revision=2018-02-14)ietf-origin",
+                            "(urn:o-ran:troubleshooting:1.0?revision=2022-08-15)o-ran-troubleshooting",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tcp-client?revision=2019-07-02)ietf-tcp-client",
+                            "(urn:o-ran:ves-sn:1.0?revision=2020-12-10)o-ran-ves-subscribed-notifications",
+                            "(urn:o-ran:supervision:1.0?revision=2022-12-05)o-ran-supervision",
+                            "(urn:o-ran:user-mgmt:1.0?revision=2022-08-15)o-ran-usermgmt",
+                            "(urn:o-ran:processing-element:1.0?revision=2022-08-15)o-ran-processing-element",
+                            "(urn:o-ran:laa-operations:1.0?revision=2021-12-01)o-ran-laa-operations",
+                            "(urn:ietf:params:xml:ns:yang:ietf-ssh-server?revision=2019-07-02)ietf-ssh-server",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-nmda?revision=2019-01-07)ietf-netconf-nmda",
+                            "(urn:o-ran:uplane-conf:1.0?revision=2022-12-05)o-ran-uplane-conf",
+                            "(urn:ietf:params:xml:ns:yang:1?revision=2017-02-20)yang",
+                            "(urn:o-ran:certificates:1.0?revision=2022-08-15)o-ran-certificates",
+                            "(urn:ietf:params:xml:ns:yang:ietf-ip?revision=2018-02-22)ietf-ip",
+                            "(urn:ietf:params:xml:ns:yang:ietf-ssh-common?revision=2019-07-02)ietf-ssh-common",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tcp-common?revision=2019-07-02)ietf-tcp-common",
+                            "urn:ietf:params:netconf:base:1.1",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-server?revision=2019-07-02)ietf-netconf-server",
+                            "(urn:o-ran:lbm:1.0?revision=2021-12-01)o-ran-lbm",
+                            "(urn:ietf:params:xml:ns:netconf:base:1.0?revision=2013-09-29)ietf-netconf",
+                            "urn:ietf:params:netconf:base:1.0",
+                            "(urn:o-ran:trace:1.0?revision=2022-08-15)o-ran-trace",
+                            "(urn:ietf:params:xml:ns:yang:iana-crypt-hash?revision=2014-08-06)iana-crypt-hash",
+                            "urn:ietf:params:netconf:capability:notification:1.0",
+                            "(urn:o-ran:operations:1.0?revision=2022-08-15)o-ran-operations",
+                            "urn:ietf:params:netconf:capability:validate:1.1",
+                            "(urn:o-ran:laa:1.0?revision=2022-08-15)o-ran-laa",
+                            "(urn:o-ran:shared-cell:1.0?revision=2022-12-05)o-ran-shared-cell",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-schema-mount?revision=2019-01-14)ietf-yang-schema-mount",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-monitoring?revision=2010-10-04)ietf-netconf-monitoring",
+                            "(urn:ieee:std:802.1X:yang:ieee802-dot1x-types?revision=2020-02-18)ieee802-dot1x-types",
+                            "(urn:o-ran:compression-factors:1.0?revision=2021-12-01)o-ran-compression-factors",
+                            "(urn:ietf:params:xml:ns:yang:ietf-keystore?revision=2019-07-02)ietf-keystore",
+                            "(urn:ieee:std:802.1X:yang:ieee802-dot1x?revision=2020-02-18)ieee802-dot1x",
+                            "(urn:o-ran-sc:params:xml:ns:yang:nts:common?revision=2022-09-29)nts-common",
+                            "(urn:o-ran:hardware:1.0?revision=2022-12-05)o-ran-hardware",
+                            "(urn:onap:system?revision=2022-11-04)onap-system",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-acm?revision=2018-02-14)ietf-netconf-acm",
+                            "(urn:o-ran:ald-port:1.0?revision=2021-12-01)o-ran-ald-port",
+                            "(urn:o-ran:common-yang-types:1.0?revision=2022-08-15)o-ran-common-yang-types",
+                            "urn:ietf:params:netconf:capability:confirmed-commit:1.1",
+                            "(urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications?revision=2019-09-09)ietf-subscribed-notifications",
+                            "urn:ietf:params:netconf:capability:writable-running:1.0",
+                            "(urn:o-ran:ethernet-fwd:1.0?revision=2021-12-01)o-ran-ethernet-forwarding",
+                            "(urn:ietf:params:xml:ns:yang:ietf-x509-cert-to-name?revision=2014-12-10)ietf-x509-cert-to-name",
+                            "(urn:ietf:params:xml:ns:yang:ietf-restconf?revision=2017-01-26)ietf-restconf",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-library?revision=2019-01-04)ietf-yang-library",
+                            "(urn:ietf:params:xml:ns:netconf:notification:1.0?revision=2008-07-14)notifications",
+                            "(urn:o-ran:fan:1.0?revision=2021-12-01)o-ran-fan",
+                            "(urn:o-ran:file-management:1.0?revision=2022-08-15)o-ran-file-management"
+                        ],
+                        "unavailable-capabilities": [
+                            "(urn:sysrepo:plugind?revision=2020-12-10)sysrepo-plugind"
+                        ]
+                    },
+                    "node-id": "O-RU-11221",
+                    "port": 44368,
+                    "status": "Connected"
+                },
+                {
+                    "core-model-capability": "Unsupported",
+                    "device-type": "O-RAN",
+                    "host": "172.19.0.2",
+                    "id": "O-RU-11222",
+                    "is-required": false,
+                    "node-details": {
+                        "available-capabilities": [
+                            "(urn:o-ran:performance-management:1.0?revision=2022-08-15)o-ran-performance-management",
+                            "urn:ietf:params:netconf:capability:candidate:1.0",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tls-server?revision=2019-07-02)ietf-tls-server",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-metadata?revision=2016-08-05)ietf-yang-metadata",
+                            "urn:ietf:params:netconf:capability:xpath:1.0",
+                            "(urn:o-ran:ald:1.0?revision=2021-12-01)o-ran-ald",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-types?revision=2013-07-15)ietf-yang-types",
+                            "(urn:o-ran:dhcp:1.0?revision=2022-08-15)o-ran-dhcp",
+                            "(urn:ietf:params:xml:ns:yang:ietf-interfaces?revision=2018-02-20)ietf-interfaces",
+                            "(urn:o-ran:external-io:1.0?revision=2019-07-03)o-ran-externalio",
+                            "(urn:ietf:params:xml:ns:yang:ietf-crypto-types?revision=2019-07-02)ietf-crypto-types",
+                            "urn:ietf:params:netconf:capability:interleave:1.0",
+                            "(urn:o-ran:message5:1.0?revision=2021-12-01)o-ran-ecpri-delay",
+                            "(urn:o-ran:sync:1.0?revision=2022-08-15)o-ran-sync",
+                            "(urn:ietf:params:xml:ns:yang:iana-if-type?revision=2017-01-19)iana-if-type",
+                            "(urn:o-ran:interfaces:1.0?revision=2021-12-01)o-ran-interfaces",
+                            "(urn:ietf:params:xml:ns:yang:ietf-truststore?revision=2019-07-02)ietf-truststore",
+                            "(urn:ietf:params:xml:ns:yang:ietf-crypto-types?revision=2019-04-29)ietf-crypto-types",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tcp-server?revision=2019-07-02)ietf-tcp-server",
+                            "urn:ietf:params:netconf:capability:rollback-on-error:1.0",
+                            "(urn:o-ran:delay:1.0?revision=2022-08-15)o-ran-delay-management",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-notifications?revision=2012-02-06)ietf-netconf-notifications",
+                            "(urn:o-ran:wg4feat:1.0?revision=2022-12-05)o-ran-wg4-features",
+                            "urn:ietf:params:netconf:capability:yang-library:1.1?revision=2019-01-04&content-id=88",
+                            "urn:ietf:params:netconf:capability:with-defaults:1.0?basic-mode=explicit&also-supported=report-all,report-all-tagged,trim,explicit",
+                            "(urn:ietf:params:xml:ns:yang:ietf-dhcpv6-common?revision=2021-01-29)ietf-dhcpv6-common",
+                            "(urn:ieee:std:802.1Q:yang:ieee802-types?revision=2020-06-04)ieee802-types",
+                            "(urn:ietf:params:xml:ns:yang:ietf-system?revision=2014-08-06)ietf-system",
+                            "(urn:o-ran:transceiver:1.0?revision=2022-12-05)o-ran-transceiver",
+                            "(urn:ietf:params:xml:ns:yang:ietf-hardware?revision=2018-03-13)ietf-hardware",
+                            "urn:ietf:params:netconf:capability:startup:1.0",
+                            "(urn:o-ran:fm:1.0?revision=2022-08-15)o-ran-fm",
+                            "(urn:ietf:params:xml:ns:yang:ietf-network-instance?revision=2019-01-21)ietf-network-instance",
+                            "(urn:o-ran:beamforming:1.0?revision=2022-12-05)o-ran-beamforming",
+                            "(urn:o-ran:software-management:1.0?revision=2022-12-05)o-ran-software-management",
+                            "(urn:o-ran:module-cap:1.0?revision=2022-12-05)o-ran-module-cap",
+                            "(urn:ietf:params:xml:ns:yang:ietf-inet-types?revision=2013-07-15)ietf-inet-types",
+                            "(urn:ietf:params:xml:ns:yang:ietf-dhcpv6-types?revision=2018-09-04)ietf-dhcpv6-types",
+                            "(urn:o-ran:wg1identityref:1.0?revision=2022-08-15)o-ran-common-identity-refs",
+                            "(urn:o-ran:mplane-interfaces:1.0?revision=2021-12-01)o-ran-mplane-int",
+                            "(urn:ietf:params:xml:ns:yang:ietf-datastores?revision=2018-02-14)ietf-datastores",
+                            "(urn:o-ran:udpecho:1.0?revision=2019-02-04)o-ran-udp-echo",
+                            "(urn:ietf:params:xml:ns:netmod:notification?revision=2008-07-14)nc-notifications",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tls-common?revision=2019-07-02)ietf-tls-common",
+                            "(urn:ietf:params:xml:ns:yang:iana-hardware?revision=2018-03-13)iana-hardware",
+                            "(urn:o-ran-sc:params:xml:ns:yang:nts:network:function?revision=2021-06-18)nts-network-function",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-with-defaults?revision=2011-06-01)ietf-netconf-with-defaults",
+                            "(urn:ietf:params:xml:ns:yang:ietf-origin?revision=2018-02-14)ietf-origin",
+                            "(urn:o-ran:troubleshooting:1.0?revision=2022-08-15)o-ran-troubleshooting",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tcp-client?revision=2019-07-02)ietf-tcp-client",
+                            "(urn:o-ran:ves-sn:1.0?revision=2020-12-10)o-ran-ves-subscribed-notifications",
+                            "(urn:o-ran:supervision:1.0?revision=2022-12-05)o-ran-supervision",
+                            "(urn:o-ran:user-mgmt:1.0?revision=2022-08-15)o-ran-usermgmt",
+                            "(urn:o-ran:processing-element:1.0?revision=2022-08-15)o-ran-processing-element",
+                            "(urn:o-ran:laa-operations:1.0?revision=2021-12-01)o-ran-laa-operations",
+                            "(urn:ietf:params:xml:ns:yang:ietf-ssh-server?revision=2019-07-02)ietf-ssh-server",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-nmda?revision=2019-01-07)ietf-netconf-nmda",
+                            "(urn:o-ran:uplane-conf:1.0?revision=2022-12-05)o-ran-uplane-conf",
+                            "(urn:ietf:params:xml:ns:yang:1?revision=2017-02-20)yang",
+                            "(urn:o-ran:certificates:1.0?revision=2022-08-15)o-ran-certificates",
+                            "(urn:ietf:params:xml:ns:yang:ietf-ip?revision=2018-02-22)ietf-ip",
+                            "(urn:ietf:params:xml:ns:yang:ietf-ssh-common?revision=2019-07-02)ietf-ssh-common",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tcp-common?revision=2019-07-02)ietf-tcp-common",
+                            "urn:ietf:params:netconf:base:1.1",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-server?revision=2019-07-02)ietf-netconf-server",
+                            "(urn:o-ran:lbm:1.0?revision=2021-12-01)o-ran-lbm",
+                            "(urn:ietf:params:xml:ns:netconf:base:1.0?revision=2013-09-29)ietf-netconf",
+                            "urn:ietf:params:netconf:base:1.0",
+                            "(urn:o-ran:trace:1.0?revision=2022-08-15)o-ran-trace",
+                            "(urn:ietf:params:xml:ns:yang:iana-crypt-hash?revision=2014-08-06)iana-crypt-hash",
+                            "urn:ietf:params:netconf:capability:notification:1.0",
+                            "(urn:o-ran:operations:1.0?revision=2022-08-15)o-ran-operations",
+                            "urn:ietf:params:netconf:capability:validate:1.1",
+                            "(urn:o-ran:laa:1.0?revision=2022-08-15)o-ran-laa",
+                            "(urn:o-ran:shared-cell:1.0?revision=2022-12-05)o-ran-shared-cell",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-schema-mount?revision=2019-01-14)ietf-yang-schema-mount",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-monitoring?revision=2010-10-04)ietf-netconf-monitoring",
+                            "(urn:ieee:std:802.1X:yang:ieee802-dot1x-types?revision=2020-02-18)ieee802-dot1x-types",
+                            "(urn:o-ran:compression-factors:1.0?revision=2021-12-01)o-ran-compression-factors",
+                            "(urn:ietf:params:xml:ns:yang:ietf-keystore?revision=2019-07-02)ietf-keystore",
+                            "(urn:ieee:std:802.1X:yang:ieee802-dot1x?revision=2020-02-18)ieee802-dot1x",
+                            "(urn:o-ran-sc:params:xml:ns:yang:nts:common?revision=2022-09-29)nts-common",
+                            "(urn:o-ran:hardware:1.0?revision=2022-12-05)o-ran-hardware",
+                            "(urn:onap:system?revision=2022-11-04)onap-system",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-acm?revision=2018-02-14)ietf-netconf-acm",
+                            "(urn:o-ran:ald-port:1.0?revision=2021-12-01)o-ran-ald-port",
+                            "(urn:o-ran:common-yang-types:1.0?revision=2022-08-15)o-ran-common-yang-types",
+                            "urn:ietf:params:netconf:capability:confirmed-commit:1.1",
+                            "(urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications?revision=2019-09-09)ietf-subscribed-notifications",
+                            "urn:ietf:params:netconf:capability:writable-running:1.0",
+                            "(urn:o-ran:ethernet-fwd:1.0?revision=2021-12-01)o-ran-ethernet-forwarding",
+                            "(urn:ietf:params:xml:ns:yang:ietf-x509-cert-to-name?revision=2014-12-10)ietf-x509-cert-to-name",
+                            "(urn:ietf:params:xml:ns:yang:ietf-restconf?revision=2017-01-26)ietf-restconf",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-library?revision=2019-01-04)ietf-yang-library",
+                            "(urn:ietf:params:xml:ns:netconf:notification:1.0?revision=2008-07-14)notifications",
+                            "(urn:o-ran:fan:1.0?revision=2021-12-01)o-ran-fan",
+                            "(urn:o-ran:file-management:1.0?revision=2022-08-15)o-ran-file-management"
+                        ],
+                        "unavailable-capabilities": [
+                            "(urn:sysrepo:plugind?revision=2020-12-10)sysrepo-plugind"
+                        ]
+                    },
+                    "node-id": "O-RU-11222",
+                    "port": 44358,
+                    "status": "Connected"
+                },
+                {
+                    "core-model-capability": "Unsupported",
+                    "device-type": "O-RAN",
+                    "host": "172.19.0.2",
+                    "id": "O-RU-11224",
+                    "is-required": false,
+                    "node-details": {
+                        "available-capabilities": [
+                            "(urn:o-ran:performance-management:1.0?revision=2022-08-15)o-ran-performance-management",
+                            "urn:ietf:params:netconf:capability:candidate:1.0",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tls-server?revision=2019-07-02)ietf-tls-server",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-metadata?revision=2016-08-05)ietf-yang-metadata",
+                            "urn:ietf:params:netconf:capability:xpath:1.0",
+                            "(urn:o-ran:ald:1.0?revision=2021-12-01)o-ran-ald",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-types?revision=2013-07-15)ietf-yang-types",
+                            "(urn:o-ran:dhcp:1.0?revision=2022-08-15)o-ran-dhcp",
+                            "(urn:ietf:params:xml:ns:yang:ietf-interfaces?revision=2018-02-20)ietf-interfaces",
+                            "(urn:o-ran:external-io:1.0?revision=2019-07-03)o-ran-externalio",
+                            "(urn:ietf:params:xml:ns:yang:ietf-crypto-types?revision=2019-07-02)ietf-crypto-types",
+                            "urn:ietf:params:netconf:capability:interleave:1.0",
+                            "(urn:o-ran:message5:1.0?revision=2021-12-01)o-ran-ecpri-delay",
+                            "(urn:o-ran:sync:1.0?revision=2022-08-15)o-ran-sync",
+                            "(urn:ietf:params:xml:ns:yang:iana-if-type?revision=2017-01-19)iana-if-type",
+                            "(urn:o-ran:interfaces:1.0?revision=2021-12-01)o-ran-interfaces",
+                            "(urn:ietf:params:xml:ns:yang:ietf-truststore?revision=2019-07-02)ietf-truststore",
+                            "(urn:ietf:params:xml:ns:yang:ietf-crypto-types?revision=2019-04-29)ietf-crypto-types",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tcp-server?revision=2019-07-02)ietf-tcp-server",
+                            "urn:ietf:params:netconf:capability:rollback-on-error:1.0",
+                            "(urn:o-ran:delay:1.0?revision=2022-08-15)o-ran-delay-management",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-notifications?revision=2012-02-06)ietf-netconf-notifications",
+                            "(urn:o-ran:wg4feat:1.0?revision=2022-12-05)o-ran-wg4-features",
+                            "urn:ietf:params:netconf:capability:yang-library:1.1?revision=2019-01-04&content-id=88",
+                            "urn:ietf:params:netconf:capability:with-defaults:1.0?basic-mode=explicit&also-supported=report-all,report-all-tagged,trim,explicit",
+                            "(urn:ietf:params:xml:ns:yang:ietf-dhcpv6-common?revision=2021-01-29)ietf-dhcpv6-common",
+                            "(urn:ieee:std:802.1Q:yang:ieee802-types?revision=2020-06-04)ieee802-types",
+                            "(urn:ietf:params:xml:ns:yang:ietf-system?revision=2014-08-06)ietf-system",
+                            "(urn:o-ran:transceiver:1.0?revision=2022-12-05)o-ran-transceiver",
+                            "(urn:ietf:params:xml:ns:yang:ietf-hardware?revision=2018-03-13)ietf-hardware",
+                            "urn:ietf:params:netconf:capability:startup:1.0",
+                            "(urn:o-ran:fm:1.0?revision=2022-08-15)o-ran-fm",
+                            "(urn:ietf:params:xml:ns:yang:ietf-network-instance?revision=2019-01-21)ietf-network-instance",
+                            "(urn:o-ran:beamforming:1.0?revision=2022-12-05)o-ran-beamforming",
+                            "(urn:o-ran:software-management:1.0?revision=2022-12-05)o-ran-software-management",
+                            "(urn:o-ran:module-cap:1.0?revision=2022-12-05)o-ran-module-cap",
+                            "(urn:ietf:params:xml:ns:yang:ietf-inet-types?revision=2013-07-15)ietf-inet-types",
+                            "(urn:ietf:params:xml:ns:yang:ietf-dhcpv6-types?revision=2018-09-04)ietf-dhcpv6-types",
+                            "(urn:o-ran:wg1identityref:1.0?revision=2022-08-15)o-ran-common-identity-refs",
+                            "(urn:o-ran:mplane-interfaces:1.0?revision=2021-12-01)o-ran-mplane-int",
+                            "(urn:ietf:params:xml:ns:yang:ietf-datastores?revision=2018-02-14)ietf-datastores",
+                            "(urn:o-ran:udpecho:1.0?revision=2019-02-04)o-ran-udp-echo",
+                            "(urn:ietf:params:xml:ns:netmod:notification?revision=2008-07-14)nc-notifications",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tls-common?revision=2019-07-02)ietf-tls-common",
+                            "(urn:ietf:params:xml:ns:yang:iana-hardware?revision=2018-03-13)iana-hardware",
+                            "(urn:o-ran-sc:params:xml:ns:yang:nts:network:function?revision=2021-06-18)nts-network-function",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-with-defaults?revision=2011-06-01)ietf-netconf-with-defaults",
+                            "(urn:ietf:params:xml:ns:yang:ietf-origin?revision=2018-02-14)ietf-origin",
+                            "(urn:o-ran:troubleshooting:1.0?revision=2022-08-15)o-ran-troubleshooting",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tcp-client?revision=2019-07-02)ietf-tcp-client",
+                            "(urn:o-ran:ves-sn:1.0?revision=2020-12-10)o-ran-ves-subscribed-notifications",
+                            "(urn:o-ran:supervision:1.0?revision=2022-12-05)o-ran-supervision",
+                            "(urn:o-ran:user-mgmt:1.0?revision=2022-08-15)o-ran-usermgmt",
+                            "(urn:o-ran:processing-element:1.0?revision=2022-08-15)o-ran-processing-element",
+                            "(urn:o-ran:laa-operations:1.0?revision=2021-12-01)o-ran-laa-operations",
+                            "(urn:ietf:params:xml:ns:yang:ietf-ssh-server?revision=2019-07-02)ietf-ssh-server",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-nmda?revision=2019-01-07)ietf-netconf-nmda",
+                            "(urn:o-ran:uplane-conf:1.0?revision=2022-12-05)o-ran-uplane-conf",
+                            "(urn:ietf:params:xml:ns:yang:1?revision=2017-02-20)yang",
+                            "(urn:o-ran:certificates:1.0?revision=2022-08-15)o-ran-certificates",
+                            "(urn:ietf:params:xml:ns:yang:ietf-ip?revision=2018-02-22)ietf-ip",
+                            "(urn:ietf:params:xml:ns:yang:ietf-ssh-common?revision=2019-07-02)ietf-ssh-common",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tcp-common?revision=2019-07-02)ietf-tcp-common",
+                            "urn:ietf:params:netconf:base:1.1",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-server?revision=2019-07-02)ietf-netconf-server",
+                            "(urn:o-ran:lbm:1.0?revision=2021-12-01)o-ran-lbm",
+                            "(urn:ietf:params:xml:ns:netconf:base:1.0?revision=2013-09-29)ietf-netconf",
+                            "urn:ietf:params:netconf:base:1.0",
+                            "(urn:o-ran:trace:1.0?revision=2022-08-15)o-ran-trace",
+                            "(urn:ietf:params:xml:ns:yang:iana-crypt-hash?revision=2014-08-06)iana-crypt-hash",
+                            "urn:ietf:params:netconf:capability:notification:1.0",
+                            "(urn:o-ran:operations:1.0?revision=2022-08-15)o-ran-operations",
+                            "urn:ietf:params:netconf:capability:validate:1.1",
+                            "(urn:o-ran:laa:1.0?revision=2022-08-15)o-ran-laa",
+                            "(urn:o-ran:shared-cell:1.0?revision=2022-12-05)o-ran-shared-cell",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-schema-mount?revision=2019-01-14)ietf-yang-schema-mount",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-monitoring?revision=2010-10-04)ietf-netconf-monitoring",
+                            "(urn:ieee:std:802.1X:yang:ieee802-dot1x-types?revision=2020-02-18)ieee802-dot1x-types",
+                            "(urn:o-ran:compression-factors:1.0?revision=2021-12-01)o-ran-compression-factors",
+                            "(urn:ietf:params:xml:ns:yang:ietf-keystore?revision=2019-07-02)ietf-keystore",
+                            "(urn:ieee:std:802.1X:yang:ieee802-dot1x?revision=2020-02-18)ieee802-dot1x",
+                            "(urn:o-ran-sc:params:xml:ns:yang:nts:common?revision=2022-09-29)nts-common",
+                            "(urn:o-ran:hardware:1.0?revision=2022-12-05)o-ran-hardware",
+                            "(urn:onap:system?revision=2022-11-04)onap-system",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-acm?revision=2018-02-14)ietf-netconf-acm",
+                            "(urn:o-ran:ald-port:1.0?revision=2021-12-01)o-ran-ald-port",
+                            "(urn:o-ran:common-yang-types:1.0?revision=2022-08-15)o-ran-common-yang-types",
+                            "urn:ietf:params:netconf:capability:confirmed-commit:1.1",
+                            "(urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications?revision=2019-09-09)ietf-subscribed-notifications",
+                            "urn:ietf:params:netconf:capability:writable-running:1.0",
+                            "(urn:o-ran:ethernet-fwd:1.0?revision=2021-12-01)o-ran-ethernet-forwarding",
+                            "(urn:ietf:params:xml:ns:yang:ietf-x509-cert-to-name?revision=2014-12-10)ietf-x509-cert-to-name",
+                            "(urn:ietf:params:xml:ns:yang:ietf-restconf?revision=2017-01-26)ietf-restconf",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-library?revision=2019-01-04)ietf-yang-library",
+                            "(urn:ietf:params:xml:ns:netconf:notification:1.0?revision=2008-07-14)notifications",
+                            "(urn:o-ran:fan:1.0?revision=2021-12-01)o-ran-fan",
+                            "(urn:o-ran:file-management:1.0?revision=2022-08-15)o-ran-file-management"
+                        ],
+                        "unavailable-capabilities": [
+                            "(urn:sysrepo:plugind?revision=2020-12-10)sysrepo-plugind"
+                        ]
+                    },
+                    "node-id": "O-RU-11224",
+                    "port": 41058,
+                    "status": "Connected"
+                },
+                {
+                    "core-model-capability": "Unsupported",
+                    "device-type": "O-RAN",
+                    "host": "172.19.0.2",
+                    "id": "O-RU-11223",
+                    "is-required": false,
+                    "node-details": {
+                        "available-capabilities": [
+                            "(urn:o-ran:performance-management:1.0?revision=2022-08-15)o-ran-performance-management",
+                            "urn:ietf:params:netconf:capability:candidate:1.0",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tls-server?revision=2019-07-02)ietf-tls-server",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-metadata?revision=2016-08-05)ietf-yang-metadata",
+                            "urn:ietf:params:netconf:capability:xpath:1.0",
+                            "(urn:o-ran:ald:1.0?revision=2021-12-01)o-ran-ald",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-types?revision=2013-07-15)ietf-yang-types",
+                            "(urn:o-ran:dhcp:1.0?revision=2022-08-15)o-ran-dhcp",
+                            "(urn:ietf:params:xml:ns:yang:ietf-interfaces?revision=2018-02-20)ietf-interfaces",
+                            "(urn:o-ran:external-io:1.0?revision=2019-07-03)o-ran-externalio",
+                            "(urn:ietf:params:xml:ns:yang:ietf-crypto-types?revision=2019-07-02)ietf-crypto-types",
+                            "urn:ietf:params:netconf:capability:interleave:1.0",
+                            "(urn:o-ran:message5:1.0?revision=2021-12-01)o-ran-ecpri-delay",
+                            "(urn:o-ran:sync:1.0?revision=2022-08-15)o-ran-sync",
+                            "(urn:ietf:params:xml:ns:yang:iana-if-type?revision=2017-01-19)iana-if-type",
+                            "(urn:o-ran:interfaces:1.0?revision=2021-12-01)o-ran-interfaces",
+                            "(urn:ietf:params:xml:ns:yang:ietf-truststore?revision=2019-07-02)ietf-truststore",
+                            "(urn:ietf:params:xml:ns:yang:ietf-crypto-types?revision=2019-04-29)ietf-crypto-types",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tcp-server?revision=2019-07-02)ietf-tcp-server",
+                            "urn:ietf:params:netconf:capability:rollback-on-error:1.0",
+                            "(urn:o-ran:delay:1.0?revision=2022-08-15)o-ran-delay-management",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-notifications?revision=2012-02-06)ietf-netconf-notifications",
+                            "(urn:o-ran:wg4feat:1.0?revision=2022-12-05)o-ran-wg4-features",
+                            "urn:ietf:params:netconf:capability:yang-library:1.1?revision=2019-01-04&content-id=88",
+                            "urn:ietf:params:netconf:capability:with-defaults:1.0?basic-mode=explicit&also-supported=report-all,report-all-tagged,trim,explicit",
+                            "(urn:ietf:params:xml:ns:yang:ietf-dhcpv6-common?revision=2021-01-29)ietf-dhcpv6-common",
+                            "(urn:ieee:std:802.1Q:yang:ieee802-types?revision=2020-06-04)ieee802-types",
+                            "(urn:ietf:params:xml:ns:yang:ietf-system?revision=2014-08-06)ietf-system",
+                            "(urn:o-ran:transceiver:1.0?revision=2022-12-05)o-ran-transceiver",
+                            "(urn:ietf:params:xml:ns:yang:ietf-hardware?revision=2018-03-13)ietf-hardware",
+                            "urn:ietf:params:netconf:capability:startup:1.0",
+                            "(urn:o-ran:fm:1.0?revision=2022-08-15)o-ran-fm",
+                            "(urn:ietf:params:xml:ns:yang:ietf-network-instance?revision=2019-01-21)ietf-network-instance",
+                            "(urn:o-ran:beamforming:1.0?revision=2022-12-05)o-ran-beamforming",
+                            "(urn:o-ran:software-management:1.0?revision=2022-12-05)o-ran-software-management",
+                            "(urn:o-ran:module-cap:1.0?revision=2022-12-05)o-ran-module-cap",
+                            "(urn:ietf:params:xml:ns:yang:ietf-inet-types?revision=2013-07-15)ietf-inet-types",
+                            "(urn:ietf:params:xml:ns:yang:ietf-dhcpv6-types?revision=2018-09-04)ietf-dhcpv6-types",
+                            "(urn:o-ran:wg1identityref:1.0?revision=2022-08-15)o-ran-common-identity-refs",
+                            "(urn:o-ran:mplane-interfaces:1.0?revision=2021-12-01)o-ran-mplane-int",
+                            "(urn:ietf:params:xml:ns:yang:ietf-datastores?revision=2018-02-14)ietf-datastores",
+                            "(urn:o-ran:udpecho:1.0?revision=2019-02-04)o-ran-udp-echo",
+                            "(urn:ietf:params:xml:ns:netmod:notification?revision=2008-07-14)nc-notifications",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tls-common?revision=2019-07-02)ietf-tls-common",
+                            "(urn:ietf:params:xml:ns:yang:iana-hardware?revision=2018-03-13)iana-hardware",
+                            "(urn:o-ran-sc:params:xml:ns:yang:nts:network:function?revision=2021-06-18)nts-network-function",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-with-defaults?revision=2011-06-01)ietf-netconf-with-defaults",
+                            "(urn:ietf:params:xml:ns:yang:ietf-origin?revision=2018-02-14)ietf-origin",
+                            "(urn:o-ran:troubleshooting:1.0?revision=2022-08-15)o-ran-troubleshooting",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tcp-client?revision=2019-07-02)ietf-tcp-client",
+                            "(urn:o-ran:ves-sn:1.0?revision=2020-12-10)o-ran-ves-subscribed-notifications",
+                            "(urn:o-ran:supervision:1.0?revision=2022-12-05)o-ran-supervision",
+                            "(urn:o-ran:user-mgmt:1.0?revision=2022-08-15)o-ran-usermgmt",
+                            "(urn:o-ran:processing-element:1.0?revision=2022-08-15)o-ran-processing-element",
+                            "(urn:o-ran:laa-operations:1.0?revision=2021-12-01)o-ran-laa-operations",
+                            "(urn:ietf:params:xml:ns:yang:ietf-ssh-server?revision=2019-07-02)ietf-ssh-server",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-nmda?revision=2019-01-07)ietf-netconf-nmda",
+                            "(urn:o-ran:uplane-conf:1.0?revision=2022-12-05)o-ran-uplane-conf",
+                            "(urn:ietf:params:xml:ns:yang:1?revision=2017-02-20)yang",
+                            "(urn:o-ran:certificates:1.0?revision=2022-08-15)o-ran-certificates",
+                            "(urn:ietf:params:xml:ns:yang:ietf-ip?revision=2018-02-22)ietf-ip",
+                            "(urn:ietf:params:xml:ns:yang:ietf-ssh-common?revision=2019-07-02)ietf-ssh-common",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tcp-common?revision=2019-07-02)ietf-tcp-common",
+                            "urn:ietf:params:netconf:base:1.1",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-server?revision=2019-07-02)ietf-netconf-server",
+                            "(urn:o-ran:lbm:1.0?revision=2021-12-01)o-ran-lbm",
+                            "(urn:ietf:params:xml:ns:netconf:base:1.0?revision=2013-09-29)ietf-netconf",
+                            "urn:ietf:params:netconf:base:1.0",
+                            "(urn:o-ran:trace:1.0?revision=2022-08-15)o-ran-trace",
+                            "(urn:ietf:params:xml:ns:yang:iana-crypt-hash?revision=2014-08-06)iana-crypt-hash",
+                            "urn:ietf:params:netconf:capability:notification:1.0",
+                            "(urn:o-ran:operations:1.0?revision=2022-08-15)o-ran-operations",
+                            "urn:ietf:params:netconf:capability:validate:1.1",
+                            "(urn:o-ran:laa:1.0?revision=2022-08-15)o-ran-laa",
+                            "(urn:o-ran:shared-cell:1.0?revision=2022-12-05)o-ran-shared-cell",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-schema-mount?revision=2019-01-14)ietf-yang-schema-mount",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-monitoring?revision=2010-10-04)ietf-netconf-monitoring",
+                            "(urn:ieee:std:802.1X:yang:ieee802-dot1x-types?revision=2020-02-18)ieee802-dot1x-types",
+                            "(urn:o-ran:compression-factors:1.0?revision=2021-12-01)o-ran-compression-factors",
+                            "(urn:ietf:params:xml:ns:yang:ietf-keystore?revision=2019-07-02)ietf-keystore",
+                            "(urn:ieee:std:802.1X:yang:ieee802-dot1x?revision=2020-02-18)ieee802-dot1x",
+                            "(urn:o-ran-sc:params:xml:ns:yang:nts:common?revision=2022-09-29)nts-common",
+                            "(urn:o-ran:hardware:1.0?revision=2022-12-05)o-ran-hardware",
+                            "(urn:onap:system?revision=2022-11-04)onap-system",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-acm?revision=2018-02-14)ietf-netconf-acm",
+                            "(urn:o-ran:ald-port:1.0?revision=2021-12-01)o-ran-ald-port",
+                            "(urn:o-ran:common-yang-types:1.0?revision=2022-08-15)o-ran-common-yang-types",
+                            "urn:ietf:params:netconf:capability:confirmed-commit:1.1",
+                            "(urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications?revision=2019-09-09)ietf-subscribed-notifications",
+                            "urn:ietf:params:netconf:capability:writable-running:1.0",
+                            "(urn:o-ran:ethernet-fwd:1.0?revision=2021-12-01)o-ran-ethernet-forwarding",
+                            "(urn:ietf:params:xml:ns:yang:ietf-x509-cert-to-name?revision=2014-12-10)ietf-x509-cert-to-name",
+                            "(urn:ietf:params:xml:ns:yang:ietf-restconf?revision=2017-01-26)ietf-restconf",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-library?revision=2019-01-04)ietf-yang-library",
+                            "(urn:ietf:params:xml:ns:netconf:notification:1.0?revision=2008-07-14)notifications",
+                            "(urn:o-ran:fan:1.0?revision=2021-12-01)o-ran-fan",
+                            "(urn:o-ran:file-management:1.0?revision=2022-08-15)o-ran-file-management"
+                        ],
+                        "unavailable-capabilities": [
+                            "(urn:sysrepo:plugind?revision=2020-12-10)sysrepo-plugind"
+                        ]
+                    },
+                    "node-id": "O-RU-11223",
+                    "port": 41044,
+                    "status": "Connected"
+                }
+            ],
+            "pagination": {
+                "page": "1",
+                "size": 10,
+                "total": "4"
+            }
+        }
+    }
+}
+
+TASK [p1_deployment : Show O-DU and O-RU connection status] ********************
+ok: [node1] => {
+    "odu_oru_status.json": {
+        "data-provider:output": {
+            "data": [
+                {
+                    "core-model-capability": "Unsupported",
+                    "device-type": "O-RAN",
+                    "host": "172.19.0.2",
+                    "id": "O-RU-11221",
+                    "is-required": false,
+                    "node-details": {
+                        "available-capabilities": [
+                            "(urn:o-ran:performance-management:1.0?revision=2022-08-15)o-ran-performance-management",
+                            "urn:ietf:params:netconf:capability:candidate:1.0",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tls-server?revision=2019-07-02)ietf-tls-server",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-metadata?revision=2016-08-05)ietf-yang-metadata",
+                            "urn:ietf:params:netconf:capability:xpath:1.0",
+                            "(urn:o-ran:ald:1.0?revision=2021-12-01)o-ran-ald",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-types?revision=2013-07-15)ietf-yang-types",
+                            "(urn:o-ran:dhcp:1.0?revision=2022-08-15)o-ran-dhcp",
+                            "(urn:ietf:params:xml:ns:yang:ietf-interfaces?revision=2018-02-20)ietf-interfaces",
+                            "(urn:o-ran:external-io:1.0?revision=2019-07-03)o-ran-externalio",
+                            "(urn:ietf:params:xml:ns:yang:ietf-crypto-types?revision=2019-07-02)ietf-crypto-types",
+                            "urn:ietf:params:netconf:capability:interleave:1.0",
+                            "(urn:o-ran:message5:1.0?revision=2021-12-01)o-ran-ecpri-delay",
+                            "(urn:o-ran:sync:1.0?revision=2022-08-15)o-ran-sync",
+                            "(urn:ietf:params:xml:ns:yang:iana-if-type?revision=2017-01-19)iana-if-type",
+                            "(urn:o-ran:interfaces:1.0?revision=2021-12-01)o-ran-interfaces",
+                            "(urn:ietf:params:xml:ns:yang:ietf-truststore?revision=2019-07-02)ietf-truststore",
+                            "(urn:ietf:params:xml:ns:yang:ietf-crypto-types?revision=2019-04-29)ietf-crypto-types",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tcp-server?revision=2019-07-02)ietf-tcp-server",
+                            "urn:ietf:params:netconf:capability:rollback-on-error:1.0",
+                            "(urn:o-ran:delay:1.0?revision=2022-08-15)o-ran-delay-management",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-notifications?revision=2012-02-06)ietf-netconf-notifications",
+                            "(urn:o-ran:wg4feat:1.0?revision=2022-12-05)o-ran-wg4-features",
+                            "urn:ietf:params:netconf:capability:yang-library:1.1?revision=2019-01-04&content-id=88",
+                            "urn:ietf:params:netconf:capability:with-defaults:1.0?basic-mode=explicit&also-supported=report-all,report-all-tagged,trim,explicit",
+                            "(urn:ietf:params:xml:ns:yang:ietf-dhcpv6-common?revision=2021-01-29)ietf-dhcpv6-common",
+                            "(urn:ieee:std:802.1Q:yang:ieee802-types?revision=2020-06-04)ieee802-types",
+                            "(urn:ietf:params:xml:ns:yang:ietf-system?revision=2014-08-06)ietf-system",
+                            "(urn:o-ran:transceiver:1.0?revision=2022-12-05)o-ran-transceiver",
+                            "(urn:ietf:params:xml:ns:yang:ietf-hardware?revision=2018-03-13)ietf-hardware",
+                            "urn:ietf:params:netconf:capability:startup:1.0",
+                            "(urn:o-ran:fm:1.0?revision=2022-08-15)o-ran-fm",
+                            "(urn:ietf:params:xml:ns:yang:ietf-network-instance?revision=2019-01-21)ietf-network-instance",
+                            "(urn:o-ran:beamforming:1.0?revision=2022-12-05)o-ran-beamforming",
+                            "(urn:o-ran:software-management:1.0?revision=2022-12-05)o-ran-software-management",
+                            "(urn:o-ran:module-cap:1.0?revision=2022-12-05)o-ran-module-cap",
+                            "(urn:ietf:params:xml:ns:yang:ietf-inet-types?revision=2013-07-15)ietf-inet-types",
+                            "(urn:ietf:params:xml:ns:yang:ietf-dhcpv6-types?revision=2018-09-04)ietf-dhcpv6-types",
+                            "(urn:o-ran:wg1identityref:1.0?revision=2022-08-15)o-ran-common-identity-refs",
+                            "(urn:o-ran:mplane-interfaces:1.0?revision=2021-12-01)o-ran-mplane-int",
+                            "(urn:ietf:params:xml:ns:yang:ietf-datastores?revision=2018-02-14)ietf-datastores",
+                            "(urn:o-ran:udpecho:1.0?revision=2019-02-04)o-ran-udp-echo",
+                            "(urn:ietf:params:xml:ns:netmod:notification?revision=2008-07-14)nc-notifications",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tls-common?revision=2019-07-02)ietf-tls-common",
+                            "(urn:ietf:params:xml:ns:yang:iana-hardware?revision=2018-03-13)iana-hardware",
+                            "(urn:o-ran-sc:params:xml:ns:yang:nts:network:function?revision=2021-06-18)nts-network-function",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-with-defaults?revision=2011-06-01)ietf-netconf-with-defaults",
+                            "(urn:ietf:params:xml:ns:yang:ietf-origin?revision=2018-02-14)ietf-origin",
+                            "(urn:o-ran:troubleshooting:1.0?revision=2022-08-15)o-ran-troubleshooting",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tcp-client?revision=2019-07-02)ietf-tcp-client",
+                            "(urn:o-ran:ves-sn:1.0?revision=2020-12-10)o-ran-ves-subscribed-notifications",
+                            "(urn:o-ran:supervision:1.0?revision=2022-12-05)o-ran-supervision",
+                            "(urn:o-ran:user-mgmt:1.0?revision=2022-08-15)o-ran-usermgmt",
+                            "(urn:o-ran:processing-element:1.0?revision=2022-08-15)o-ran-processing-element",
+                            "(urn:o-ran:laa-operations:1.0?revision=2021-12-01)o-ran-laa-operations",
+                            "(urn:ietf:params:xml:ns:yang:ietf-ssh-server?revision=2019-07-02)ietf-ssh-server",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-nmda?revision=2019-01-07)ietf-netconf-nmda",
+                            "(urn:o-ran:uplane-conf:1.0?revision=2022-12-05)o-ran-uplane-conf",
+                            "(urn:ietf:params:xml:ns:yang:1?revision=2017-02-20)yang",
+                            "(urn:o-ran:certificates:1.0?revision=2022-08-15)o-ran-certificates",
+                            "(urn:ietf:params:xml:ns:yang:ietf-ip?revision=2018-02-22)ietf-ip",
+                            "(urn:ietf:params:xml:ns:yang:ietf-ssh-common?revision=2019-07-02)ietf-ssh-common",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tcp-common?revision=2019-07-02)ietf-tcp-common",
+                            "urn:ietf:params:netconf:base:1.1",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-server?revision=2019-07-02)ietf-netconf-server",
+                            "(urn:o-ran:lbm:1.0?revision=2021-12-01)o-ran-lbm",
+                            "(urn:ietf:params:xml:ns:netconf:base:1.0?revision=2013-09-29)ietf-netconf",
+                            "urn:ietf:params:netconf:base:1.0",
+                            "(urn:o-ran:trace:1.0?revision=2022-08-15)o-ran-trace",
+                            "(urn:ietf:params:xml:ns:yang:iana-crypt-hash?revision=2014-08-06)iana-crypt-hash",
+                            "urn:ietf:params:netconf:capability:notification:1.0",
+                            "(urn:o-ran:operations:1.0?revision=2022-08-15)o-ran-operations",
+                            "urn:ietf:params:netconf:capability:validate:1.1",
+                            "(urn:o-ran:laa:1.0?revision=2022-08-15)o-ran-laa",
+                            "(urn:o-ran:shared-cell:1.0?revision=2022-12-05)o-ran-shared-cell",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-schema-mount?revision=2019-01-14)ietf-yang-schema-mount",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-monitoring?revision=2010-10-04)ietf-netconf-monitoring",
+                            "(urn:ieee:std:802.1X:yang:ieee802-dot1x-types?revision=2020-02-18)ieee802-dot1x-types",
+                            "(urn:o-ran:compression-factors:1.0?revision=2021-12-01)o-ran-compression-factors",
+                            "(urn:ietf:params:xml:ns:yang:ietf-keystore?revision=2019-07-02)ietf-keystore",
+                            "(urn:ieee:std:802.1X:yang:ieee802-dot1x?revision=2020-02-18)ieee802-dot1x",
+                            "(urn:o-ran-sc:params:xml:ns:yang:nts:common?revision=2022-09-29)nts-common",
+                            "(urn:o-ran:hardware:1.0?revision=2022-12-05)o-ran-hardware",
+                            "(urn:onap:system?revision=2022-11-04)onap-system",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-acm?revision=2018-02-14)ietf-netconf-acm",
+                            "(urn:o-ran:ald-port:1.0?revision=2021-12-01)o-ran-ald-port",
+                            "(urn:o-ran:common-yang-types:1.0?revision=2022-08-15)o-ran-common-yang-types",
+                            "urn:ietf:params:netconf:capability:confirmed-commit:1.1",
+                            "(urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications?revision=2019-09-09)ietf-subscribed-notifications",
+                            "urn:ietf:params:netconf:capability:writable-running:1.0",
+                            "(urn:o-ran:ethernet-fwd:1.0?revision=2021-12-01)o-ran-ethernet-forwarding",
+                            "(urn:ietf:params:xml:ns:yang:ietf-x509-cert-to-name?revision=2014-12-10)ietf-x509-cert-to-name",
+                            "(urn:ietf:params:xml:ns:yang:ietf-restconf?revision=2017-01-26)ietf-restconf",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-library?revision=2019-01-04)ietf-yang-library",
+                            "(urn:ietf:params:xml:ns:netconf:notification:1.0?revision=2008-07-14)notifications",
+                            "(urn:o-ran:fan:1.0?revision=2021-12-01)o-ran-fan",
+                            "(urn:o-ran:file-management:1.0?revision=2022-08-15)o-ran-file-management"
+                        ],
+                        "unavailable-capabilities": [
+                            "(urn:sysrepo:plugind?revision=2020-12-10)sysrepo-plugind"
+                        ]
+                    },
+                    "node-id": "O-RU-11221",
+                    "port": 44368,
+                    "status": "Connected"
+                },
+                {
+                    "core-model-capability": "Unsupported",
+                    "device-type": "O-RAN",
+                    "host": "172.19.0.2",
+                    "id": "O-RU-11222",
+                    "is-required": false,
+                    "node-details": {
+                        "available-capabilities": [
+                            "(urn:o-ran:performance-management:1.0?revision=2022-08-15)o-ran-performance-management",
+                            "urn:ietf:params:netconf:capability:candidate:1.0",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tls-server?revision=2019-07-02)ietf-tls-server",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-metadata?revision=2016-08-05)ietf-yang-metadata",
+                            "urn:ietf:params:netconf:capability:xpath:1.0",
+                            "(urn:o-ran:ald:1.0?revision=2021-12-01)o-ran-ald",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-types?revision=2013-07-15)ietf-yang-types",
+                            "(urn:o-ran:dhcp:1.0?revision=2022-08-15)o-ran-dhcp",
+                            "(urn:ietf:params:xml:ns:yang:ietf-interfaces?revision=2018-02-20)ietf-interfaces",
+                            "(urn:o-ran:external-io:1.0?revision=2019-07-03)o-ran-externalio",
+                            "(urn:ietf:params:xml:ns:yang:ietf-crypto-types?revision=2019-07-02)ietf-crypto-types",
+                            "urn:ietf:params:netconf:capability:interleave:1.0",
+                            "(urn:o-ran:message5:1.0?revision=2021-12-01)o-ran-ecpri-delay",
+                            "(urn:o-ran:sync:1.0?revision=2022-08-15)o-ran-sync",
+                            "(urn:ietf:params:xml:ns:yang:iana-if-type?revision=2017-01-19)iana-if-type",
+                            "(urn:o-ran:interfaces:1.0?revision=2021-12-01)o-ran-interfaces",
+                            "(urn:ietf:params:xml:ns:yang:ietf-truststore?revision=2019-07-02)ietf-truststore",
+                            "(urn:ietf:params:xml:ns:yang:ietf-crypto-types?revision=2019-04-29)ietf-crypto-types",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tcp-server?revision=2019-07-02)ietf-tcp-server",
+                            "urn:ietf:params:netconf:capability:rollback-on-error:1.0",
+                            "(urn:o-ran:delay:1.0?revision=2022-08-15)o-ran-delay-management",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-notifications?revision=2012-02-06)ietf-netconf-notifications",
+                            "(urn:o-ran:wg4feat:1.0?revision=2022-12-05)o-ran-wg4-features",
+                            "urn:ietf:params:netconf:capability:yang-library:1.1?revision=2019-01-04&content-id=88",
+                            "urn:ietf:params:netconf:capability:with-defaults:1.0?basic-mode=explicit&also-supported=report-all,report-all-tagged,trim,explicit",
+                            "(urn:ietf:params:xml:ns:yang:ietf-dhcpv6-common?revision=2021-01-29)ietf-dhcpv6-common",
+                            "(urn:ieee:std:802.1Q:yang:ieee802-types?revision=2020-06-04)ieee802-types",
+                            "(urn:ietf:params:xml:ns:yang:ietf-system?revision=2014-08-06)ietf-system",
+                            "(urn:o-ran:transceiver:1.0?revision=2022-12-05)o-ran-transceiver",
+                            "(urn:ietf:params:xml:ns:yang:ietf-hardware?revision=2018-03-13)ietf-hardware",
+                            "urn:ietf:params:netconf:capability:startup:1.0",
+                            "(urn:o-ran:fm:1.0?revision=2022-08-15)o-ran-fm",
+                            "(urn:ietf:params:xml:ns:yang:ietf-network-instance?revision=2019-01-21)ietf-network-instance",
+                            "(urn:o-ran:beamforming:1.0?revision=2022-12-05)o-ran-beamforming",
+                            "(urn:o-ran:software-management:1.0?revision=2022-12-05)o-ran-software-management",
+                            "(urn:o-ran:module-cap:1.0?revision=2022-12-05)o-ran-module-cap",
+                            "(urn:ietf:params:xml:ns:yang:ietf-inet-types?revision=2013-07-15)ietf-inet-types",
+                            "(urn:ietf:params:xml:ns:yang:ietf-dhcpv6-types?revision=2018-09-04)ietf-dhcpv6-types",
+                            "(urn:o-ran:wg1identityref:1.0?revision=2022-08-15)o-ran-common-identity-refs",
+                            "(urn:o-ran:mplane-interfaces:1.0?revision=2021-12-01)o-ran-mplane-int",
+                            "(urn:ietf:params:xml:ns:yang:ietf-datastores?revision=2018-02-14)ietf-datastores",
+                            "(urn:o-ran:udpecho:1.0?revision=2019-02-04)o-ran-udp-echo",
+                            "(urn:ietf:params:xml:ns:netmod:notification?revision=2008-07-14)nc-notifications",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tls-common?revision=2019-07-02)ietf-tls-common",
+                            "(urn:ietf:params:xml:ns:yang:iana-hardware?revision=2018-03-13)iana-hardware",
+                            "(urn:o-ran-sc:params:xml:ns:yang:nts:network:function?revision=2021-06-18)nts-network-function",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-with-defaults?revision=2011-06-01)ietf-netconf-with-defaults",
+                            "(urn:ietf:params:xml:ns:yang:ietf-origin?revision=2018-02-14)ietf-origin",
+                            "(urn:o-ran:troubleshooting:1.0?revision=2022-08-15)o-ran-troubleshooting",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tcp-client?revision=2019-07-02)ietf-tcp-client",
+                            "(urn:o-ran:ves-sn:1.0?revision=2020-12-10)o-ran-ves-subscribed-notifications",
+                            "(urn:o-ran:supervision:1.0?revision=2022-12-05)o-ran-supervision",
+                            "(urn:o-ran:user-mgmt:1.0?revision=2022-08-15)o-ran-usermgmt",
+                            "(urn:o-ran:processing-element:1.0?revision=2022-08-15)o-ran-processing-element",
+                            "(urn:o-ran:laa-operations:1.0?revision=2021-12-01)o-ran-laa-operations",
+                            "(urn:ietf:params:xml:ns:yang:ietf-ssh-server?revision=2019-07-02)ietf-ssh-server",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-nmda?revision=2019-01-07)ietf-netconf-nmda",
+                            "(urn:o-ran:uplane-conf:1.0?revision=2022-12-05)o-ran-uplane-conf",
+                            "(urn:ietf:params:xml:ns:yang:1?revision=2017-02-20)yang",
+                            "(urn:o-ran:certificates:1.0?revision=2022-08-15)o-ran-certificates",
+                            "(urn:ietf:params:xml:ns:yang:ietf-ip?revision=2018-02-22)ietf-ip",
+                            "(urn:ietf:params:xml:ns:yang:ietf-ssh-common?revision=2019-07-02)ietf-ssh-common",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tcp-common?revision=2019-07-02)ietf-tcp-common",
+                            "urn:ietf:params:netconf:base:1.1",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-server?revision=2019-07-02)ietf-netconf-server",
+                            "(urn:o-ran:lbm:1.0?revision=2021-12-01)o-ran-lbm",
+                            "(urn:ietf:params:xml:ns:netconf:base:1.0?revision=2013-09-29)ietf-netconf",
+                            "urn:ietf:params:netconf:base:1.0",
+                            "(urn:o-ran:trace:1.0?revision=2022-08-15)o-ran-trace",
+                            "(urn:ietf:params:xml:ns:yang:iana-crypt-hash?revision=2014-08-06)iana-crypt-hash",
+                            "urn:ietf:params:netconf:capability:notification:1.0",
+                            "(urn:o-ran:operations:1.0?revision=2022-08-15)o-ran-operations",
+                            "urn:ietf:params:netconf:capability:validate:1.1",
+                            "(urn:o-ran:laa:1.0?revision=2022-08-15)o-ran-laa",
+                            "(urn:o-ran:shared-cell:1.0?revision=2022-12-05)o-ran-shared-cell",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-schema-mount?revision=2019-01-14)ietf-yang-schema-mount",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-monitoring?revision=2010-10-04)ietf-netconf-monitoring",
+                            "(urn:ieee:std:802.1X:yang:ieee802-dot1x-types?revision=2020-02-18)ieee802-dot1x-types",
+                            "(urn:o-ran:compression-factors:1.0?revision=2021-12-01)o-ran-compression-factors",
+                            "(urn:ietf:params:xml:ns:yang:ietf-keystore?revision=2019-07-02)ietf-keystore",
+                            "(urn:ieee:std:802.1X:yang:ieee802-dot1x?revision=2020-02-18)ieee802-dot1x",
+                            "(urn:o-ran-sc:params:xml:ns:yang:nts:common?revision=2022-09-29)nts-common",
+                            "(urn:o-ran:hardware:1.0?revision=2022-12-05)o-ran-hardware",
+                            "(urn:onap:system?revision=2022-11-04)onap-system",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-acm?revision=2018-02-14)ietf-netconf-acm",
+                            "(urn:o-ran:ald-port:1.0?revision=2021-12-01)o-ran-ald-port",
+                            "(urn:o-ran:common-yang-types:1.0?revision=2022-08-15)o-ran-common-yang-types",
+                            "urn:ietf:params:netconf:capability:confirmed-commit:1.1",
+                            "(urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications?revision=2019-09-09)ietf-subscribed-notifications",
+                            "urn:ietf:params:netconf:capability:writable-running:1.0",
+                            "(urn:o-ran:ethernet-fwd:1.0?revision=2021-12-01)o-ran-ethernet-forwarding",
+                            "(urn:ietf:params:xml:ns:yang:ietf-x509-cert-to-name?revision=2014-12-10)ietf-x509-cert-to-name",
+                            "(urn:ietf:params:xml:ns:yang:ietf-restconf?revision=2017-01-26)ietf-restconf",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-library?revision=2019-01-04)ietf-yang-library",
+                            "(urn:ietf:params:xml:ns:netconf:notification:1.0?revision=2008-07-14)notifications",
+                            "(urn:o-ran:fan:1.0?revision=2021-12-01)o-ran-fan",
+                            "(urn:o-ran:file-management:1.0?revision=2022-08-15)o-ran-file-management"
+                        ],
+                        "unavailable-capabilities": [
+                            "(urn:sysrepo:plugind?revision=2020-12-10)sysrepo-plugind"
+                        ]
+                    },
+                    "node-id": "O-RU-11222",
+                    "port": 44358,
+                    "status": "Connected"
+                },
+                {
+                    "core-model-capability": "Unsupported",
+                    "device-type": "O-RAN",
+                    "host": "172.19.0.2",
+                    "id": "O-RU-11224",
+                    "is-required": false,
+                    "node-details": {
+                        "available-capabilities": [
+                            "(urn:o-ran:performance-management:1.0?revision=2022-08-15)o-ran-performance-management",
+                            "urn:ietf:params:netconf:capability:candidate:1.0",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tls-server?revision=2019-07-02)ietf-tls-server",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-metadata?revision=2016-08-05)ietf-yang-metadata",
+                            "urn:ietf:params:netconf:capability:xpath:1.0",
+                            "(urn:o-ran:ald:1.0?revision=2021-12-01)o-ran-ald",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-types?revision=2013-07-15)ietf-yang-types",
+                            "(urn:o-ran:dhcp:1.0?revision=2022-08-15)o-ran-dhcp",
+                            "(urn:ietf:params:xml:ns:yang:ietf-interfaces?revision=2018-02-20)ietf-interfaces",
+                            "(urn:o-ran:external-io:1.0?revision=2019-07-03)o-ran-externalio",
+                            "(urn:ietf:params:xml:ns:yang:ietf-crypto-types?revision=2019-07-02)ietf-crypto-types",
+                            "urn:ietf:params:netconf:capability:interleave:1.0",
+                            "(urn:o-ran:message5:1.0?revision=2021-12-01)o-ran-ecpri-delay",
+                            "(urn:o-ran:sync:1.0?revision=2022-08-15)o-ran-sync",
+                            "(urn:ietf:params:xml:ns:yang:iana-if-type?revision=2017-01-19)iana-if-type",
+                            "(urn:o-ran:interfaces:1.0?revision=2021-12-01)o-ran-interfaces",
+                            "(urn:ietf:params:xml:ns:yang:ietf-truststore?revision=2019-07-02)ietf-truststore",
+                            "(urn:ietf:params:xml:ns:yang:ietf-crypto-types?revision=2019-04-29)ietf-crypto-types",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tcp-server?revision=2019-07-02)ietf-tcp-server",
+                            "urn:ietf:params:netconf:capability:rollback-on-error:1.0",
+                            "(urn:o-ran:delay:1.0?revision=2022-08-15)o-ran-delay-management",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-notifications?revision=2012-02-06)ietf-netconf-notifications",
+                            "(urn:o-ran:wg4feat:1.0?revision=2022-12-05)o-ran-wg4-features",
+                            "urn:ietf:params:netconf:capability:yang-library:1.1?revision=2019-01-04&content-id=88",
+                            "urn:ietf:params:netconf:capability:with-defaults:1.0?basic-mode=explicit&also-supported=report-all,report-all-tagged,trim,explicit",
+                            "(urn:ietf:params:xml:ns:yang:ietf-dhcpv6-common?revision=2021-01-29)ietf-dhcpv6-common",
+                            "(urn:ieee:std:802.1Q:yang:ieee802-types?revision=2020-06-04)ieee802-types",
+                            "(urn:ietf:params:xml:ns:yang:ietf-system?revision=2014-08-06)ietf-system",
+                            "(urn:o-ran:transceiver:1.0?revision=2022-12-05)o-ran-transceiver",
+                            "(urn:ietf:params:xml:ns:yang:ietf-hardware?revision=2018-03-13)ietf-hardware",
+                            "urn:ietf:params:netconf:capability:startup:1.0",
+                            "(urn:o-ran:fm:1.0?revision=2022-08-15)o-ran-fm",
+                            "(urn:ietf:params:xml:ns:yang:ietf-network-instance?revision=2019-01-21)ietf-network-instance",
+                            "(urn:o-ran:beamforming:1.0?revision=2022-12-05)o-ran-beamforming",
+                            "(urn:o-ran:software-management:1.0?revision=2022-12-05)o-ran-software-management",
+                            "(urn:o-ran:module-cap:1.0?revision=2022-12-05)o-ran-module-cap",
+                            "(urn:ietf:params:xml:ns:yang:ietf-inet-types?revision=2013-07-15)ietf-inet-types",
+                            "(urn:ietf:params:xml:ns:yang:ietf-dhcpv6-types?revision=2018-09-04)ietf-dhcpv6-types",
+                            "(urn:o-ran:wg1identityref:1.0?revision=2022-08-15)o-ran-common-identity-refs",
+                            "(urn:o-ran:mplane-interfaces:1.0?revision=2021-12-01)o-ran-mplane-int",
+                            "(urn:ietf:params:xml:ns:yang:ietf-datastores?revision=2018-02-14)ietf-datastores",
+                            "(urn:o-ran:udpecho:1.0?revision=2019-02-04)o-ran-udp-echo",
+                            "(urn:ietf:params:xml:ns:netmod:notification?revision=2008-07-14)nc-notifications",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tls-common?revision=2019-07-02)ietf-tls-common",
+                            "(urn:ietf:params:xml:ns:yang:iana-hardware?revision=2018-03-13)iana-hardware",
+                            "(urn:o-ran-sc:params:xml:ns:yang:nts:network:function?revision=2021-06-18)nts-network-function",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-with-defaults?revision=2011-06-01)ietf-netconf-with-defaults",
+                            "(urn:ietf:params:xml:ns:yang:ietf-origin?revision=2018-02-14)ietf-origin",
+                            "(urn:o-ran:troubleshooting:1.0?revision=2022-08-15)o-ran-troubleshooting",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tcp-client?revision=2019-07-02)ietf-tcp-client",
+                            "(urn:o-ran:ves-sn:1.0?revision=2020-12-10)o-ran-ves-subscribed-notifications",
+                            "(urn:o-ran:supervision:1.0?revision=2022-12-05)o-ran-supervision",
+                            "(urn:o-ran:user-mgmt:1.0?revision=2022-08-15)o-ran-usermgmt",
+                            "(urn:o-ran:processing-element:1.0?revision=2022-08-15)o-ran-processing-element",
+                            "(urn:o-ran:laa-operations:1.0?revision=2021-12-01)o-ran-laa-operations",
+                            "(urn:ietf:params:xml:ns:yang:ietf-ssh-server?revision=2019-07-02)ietf-ssh-server",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-nmda?revision=2019-01-07)ietf-netconf-nmda",
+                            "(urn:o-ran:uplane-conf:1.0?revision=2022-12-05)o-ran-uplane-conf",
+                            "(urn:ietf:params:xml:ns:yang:1?revision=2017-02-20)yang",
+                            "(urn:o-ran:certificates:1.0?revision=2022-08-15)o-ran-certificates",
+                            "(urn:ietf:params:xml:ns:yang:ietf-ip?revision=2018-02-22)ietf-ip",
+                            "(urn:ietf:params:xml:ns:yang:ietf-ssh-common?revision=2019-07-02)ietf-ssh-common",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tcp-common?revision=2019-07-02)ietf-tcp-common",
+                            "urn:ietf:params:netconf:base:1.1",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-server?revision=2019-07-02)ietf-netconf-server",
+                            "(urn:o-ran:lbm:1.0?revision=2021-12-01)o-ran-lbm",
+                            "(urn:ietf:params:xml:ns:netconf:base:1.0?revision=2013-09-29)ietf-netconf",
+                            "urn:ietf:params:netconf:base:1.0",
+                            "(urn:o-ran:trace:1.0?revision=2022-08-15)o-ran-trace",
+                            "(urn:ietf:params:xml:ns:yang:iana-crypt-hash?revision=2014-08-06)iana-crypt-hash",
+                            "urn:ietf:params:netconf:capability:notification:1.0",
+                            "(urn:o-ran:operations:1.0?revision=2022-08-15)o-ran-operations",
+                            "urn:ietf:params:netconf:capability:validate:1.1",
+                            "(urn:o-ran:laa:1.0?revision=2022-08-15)o-ran-laa",
+                            "(urn:o-ran:shared-cell:1.0?revision=2022-12-05)o-ran-shared-cell",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-schema-mount?revision=2019-01-14)ietf-yang-schema-mount",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-monitoring?revision=2010-10-04)ietf-netconf-monitoring",
+                            "(urn:ieee:std:802.1X:yang:ieee802-dot1x-types?revision=2020-02-18)ieee802-dot1x-types",
+                            "(urn:o-ran:compression-factors:1.0?revision=2021-12-01)o-ran-compression-factors",
+                            "(urn:ietf:params:xml:ns:yang:ietf-keystore?revision=2019-07-02)ietf-keystore",
+                            "(urn:ieee:std:802.1X:yang:ieee802-dot1x?revision=2020-02-18)ieee802-dot1x",
+                            "(urn:o-ran-sc:params:xml:ns:yang:nts:common?revision=2022-09-29)nts-common",
+                            "(urn:o-ran:hardware:1.0?revision=2022-12-05)o-ran-hardware",
+                            "(urn:onap:system?revision=2022-11-04)onap-system",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-acm?revision=2018-02-14)ietf-netconf-acm",
+                            "(urn:o-ran:ald-port:1.0?revision=2021-12-01)o-ran-ald-port",
+                            "(urn:o-ran:common-yang-types:1.0?revision=2022-08-15)o-ran-common-yang-types",
+                            "urn:ietf:params:netconf:capability:confirmed-commit:1.1",
+                            "(urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications?revision=2019-09-09)ietf-subscribed-notifications",
+                            "urn:ietf:params:netconf:capability:writable-running:1.0",
+                            "(urn:o-ran:ethernet-fwd:1.0?revision=2021-12-01)o-ran-ethernet-forwarding",
+                            "(urn:ietf:params:xml:ns:yang:ietf-x509-cert-to-name?revision=2014-12-10)ietf-x509-cert-to-name",
+                            "(urn:ietf:params:xml:ns:yang:ietf-restconf?revision=2017-01-26)ietf-restconf",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-library?revision=2019-01-04)ietf-yang-library",
+                            "(urn:ietf:params:xml:ns:netconf:notification:1.0?revision=2008-07-14)notifications",
+                            "(urn:o-ran:fan:1.0?revision=2021-12-01)o-ran-fan",
+                            "(urn:o-ran:file-management:1.0?revision=2022-08-15)o-ran-file-management"
+                        ],
+                        "unavailable-capabilities": [
+                            "(urn:sysrepo:plugind?revision=2020-12-10)sysrepo-plugind"
+                        ]
+                    },
+                    "node-id": "O-RU-11224",
+                    "port": 41058,
+                    "status": "Connected"
+                },
+                {
+                    "core-model-capability": "Unsupported",
+                    "device-type": "O-RAN",
+                    "host": "172.19.0.2",
+                    "id": "O-RU-11223",
+                    "is-required": false,
+                    "node-details": {
+                        "available-capabilities": [
+                            "(urn:o-ran:performance-management:1.0?revision=2022-08-15)o-ran-performance-management",
+                            "urn:ietf:params:netconf:capability:candidate:1.0",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tls-server?revision=2019-07-02)ietf-tls-server",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-metadata?revision=2016-08-05)ietf-yang-metadata",
+                            "urn:ietf:params:netconf:capability:xpath:1.0",
+                            "(urn:o-ran:ald:1.0?revision=2021-12-01)o-ran-ald",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-types?revision=2013-07-15)ietf-yang-types",
+                            "(urn:o-ran:dhcp:1.0?revision=2022-08-15)o-ran-dhcp",
+                            "(urn:ietf:params:xml:ns:yang:ietf-interfaces?revision=2018-02-20)ietf-interfaces",
+                            "(urn:o-ran:external-io:1.0?revision=2019-07-03)o-ran-externalio",
+                            "(urn:ietf:params:xml:ns:yang:ietf-crypto-types?revision=2019-07-02)ietf-crypto-types",
+                            "urn:ietf:params:netconf:capability:interleave:1.0",
+                            "(urn:o-ran:message5:1.0?revision=2021-12-01)o-ran-ecpri-delay",
+                            "(urn:o-ran:sync:1.0?revision=2022-08-15)o-ran-sync",
+                            "(urn:ietf:params:xml:ns:yang:iana-if-type?revision=2017-01-19)iana-if-type",
+                            "(urn:o-ran:interfaces:1.0?revision=2021-12-01)o-ran-interfaces",
+                            "(urn:ietf:params:xml:ns:yang:ietf-truststore?revision=2019-07-02)ietf-truststore",
+                            "(urn:ietf:params:xml:ns:yang:ietf-crypto-types?revision=2019-04-29)ietf-crypto-types",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tcp-server?revision=2019-07-02)ietf-tcp-server",
+                            "urn:ietf:params:netconf:capability:rollback-on-error:1.0",
+                            "(urn:o-ran:delay:1.0?revision=2022-08-15)o-ran-delay-management",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-notifications?revision=2012-02-06)ietf-netconf-notifications",
+                            "(urn:o-ran:wg4feat:1.0?revision=2022-12-05)o-ran-wg4-features",
+                            "urn:ietf:params:netconf:capability:yang-library:1.1?revision=2019-01-04&content-id=88",
+                            "urn:ietf:params:netconf:capability:with-defaults:1.0?basic-mode=explicit&also-supported=report-all,report-all-tagged,trim,explicit",
+                            "(urn:ietf:params:xml:ns:yang:ietf-dhcpv6-common?revision=2021-01-29)ietf-dhcpv6-common",
+                            "(urn:ieee:std:802.1Q:yang:ieee802-types?revision=2020-06-04)ieee802-types",
+                            "(urn:ietf:params:xml:ns:yang:ietf-system?revision=2014-08-06)ietf-system",
+                            "(urn:o-ran:transceiver:1.0?revision=2022-12-05)o-ran-transceiver",
+                            "(urn:ietf:params:xml:ns:yang:ietf-hardware?revision=2018-03-13)ietf-hardware",
+                            "urn:ietf:params:netconf:capability:startup:1.0",
+                            "(urn:o-ran:fm:1.0?revision=2022-08-15)o-ran-fm",
+                            "(urn:ietf:params:xml:ns:yang:ietf-network-instance?revision=2019-01-21)ietf-network-instance",
+                            "(urn:o-ran:beamforming:1.0?revision=2022-12-05)o-ran-beamforming",
+                            "(urn:o-ran:software-management:1.0?revision=2022-12-05)o-ran-software-management",
+                            "(urn:o-ran:module-cap:1.0?revision=2022-12-05)o-ran-module-cap",
+                            "(urn:ietf:params:xml:ns:yang:ietf-inet-types?revision=2013-07-15)ietf-inet-types",
+                            "(urn:ietf:params:xml:ns:yang:ietf-dhcpv6-types?revision=2018-09-04)ietf-dhcpv6-types",
+                            "(urn:o-ran:wg1identityref:1.0?revision=2022-08-15)o-ran-common-identity-refs",
+                            "(urn:o-ran:mplane-interfaces:1.0?revision=2021-12-01)o-ran-mplane-int",
+                            "(urn:ietf:params:xml:ns:yang:ietf-datastores?revision=2018-02-14)ietf-datastores",
+                            "(urn:o-ran:udpecho:1.0?revision=2019-02-04)o-ran-udp-echo",
+                            "(urn:ietf:params:xml:ns:netmod:notification?revision=2008-07-14)nc-notifications",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tls-common?revision=2019-07-02)ietf-tls-common",
+                            "(urn:ietf:params:xml:ns:yang:iana-hardware?revision=2018-03-13)iana-hardware",
+                            "(urn:o-ran-sc:params:xml:ns:yang:nts:network:function?revision=2021-06-18)nts-network-function",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-with-defaults?revision=2011-06-01)ietf-netconf-with-defaults",
+                            "(urn:ietf:params:xml:ns:yang:ietf-origin?revision=2018-02-14)ietf-origin",
+                            "(urn:o-ran:troubleshooting:1.0?revision=2022-08-15)o-ran-troubleshooting",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tcp-client?revision=2019-07-02)ietf-tcp-client",
+                            "(urn:o-ran:ves-sn:1.0?revision=2020-12-10)o-ran-ves-subscribed-notifications",
+                            "(urn:o-ran:supervision:1.0?revision=2022-12-05)o-ran-supervision",
+                            "(urn:o-ran:user-mgmt:1.0?revision=2022-08-15)o-ran-usermgmt",
+                            "(urn:o-ran:processing-element:1.0?revision=2022-08-15)o-ran-processing-element",
+                            "(urn:o-ran:laa-operations:1.0?revision=2021-12-01)o-ran-laa-operations",
+                            "(urn:ietf:params:xml:ns:yang:ietf-ssh-server?revision=2019-07-02)ietf-ssh-server",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-nmda?revision=2019-01-07)ietf-netconf-nmda",
+                            "(urn:o-ran:uplane-conf:1.0?revision=2022-12-05)o-ran-uplane-conf",
+                            "(urn:ietf:params:xml:ns:yang:1?revision=2017-02-20)yang",
+                            "(urn:o-ran:certificates:1.0?revision=2022-08-15)o-ran-certificates",
+                            "(urn:ietf:params:xml:ns:yang:ietf-ip?revision=2018-02-22)ietf-ip",
+                            "(urn:ietf:params:xml:ns:yang:ietf-ssh-common?revision=2019-07-02)ietf-ssh-common",
+                            "(urn:ietf:params:xml:ns:yang:ietf-tcp-common?revision=2019-07-02)ietf-tcp-common",
+                            "urn:ietf:params:netconf:base:1.1",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-server?revision=2019-07-02)ietf-netconf-server",
+                            "(urn:o-ran:lbm:1.0?revision=2021-12-01)o-ran-lbm",
+                            "(urn:ietf:params:xml:ns:netconf:base:1.0?revision=2013-09-29)ietf-netconf",
+                            "urn:ietf:params:netconf:base:1.0",
+                            "(urn:o-ran:trace:1.0?revision=2022-08-15)o-ran-trace",
+                            "(urn:ietf:params:xml:ns:yang:iana-crypt-hash?revision=2014-08-06)iana-crypt-hash",
+                            "urn:ietf:params:netconf:capability:notification:1.0",
+                            "(urn:o-ran:operations:1.0?revision=2022-08-15)o-ran-operations",
+                            "urn:ietf:params:netconf:capability:validate:1.1",
+                            "(urn:o-ran:laa:1.0?revision=2022-08-15)o-ran-laa",
+                            "(urn:o-ran:shared-cell:1.0?revision=2022-12-05)o-ran-shared-cell",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-schema-mount?revision=2019-01-14)ietf-yang-schema-mount",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-monitoring?revision=2010-10-04)ietf-netconf-monitoring",
+                            "(urn:ieee:std:802.1X:yang:ieee802-dot1x-types?revision=2020-02-18)ieee802-dot1x-types",
+                            "(urn:o-ran:compression-factors:1.0?revision=2021-12-01)o-ran-compression-factors",
+                            "(urn:ietf:params:xml:ns:yang:ietf-keystore?revision=2019-07-02)ietf-keystore",
+                            "(urn:ieee:std:802.1X:yang:ieee802-dot1x?revision=2020-02-18)ieee802-dot1x",
+                            "(urn:o-ran-sc:params:xml:ns:yang:nts:common?revision=2022-09-29)nts-common",
+                            "(urn:o-ran:hardware:1.0?revision=2022-12-05)o-ran-hardware",
+                            "(urn:onap:system?revision=2022-11-04)onap-system",
+                            "(urn:ietf:params:xml:ns:yang:ietf-netconf-acm?revision=2018-02-14)ietf-netconf-acm",
+                            "(urn:o-ran:ald-port:1.0?revision=2021-12-01)o-ran-ald-port",
+                            "(urn:o-ran:common-yang-types:1.0?revision=2022-08-15)o-ran-common-yang-types",
+                            "urn:ietf:params:netconf:capability:confirmed-commit:1.1",
+                            "(urn:ietf:params:xml:ns:yang:ietf-subscribed-notifications?revision=2019-09-09)ietf-subscribed-notifications",
+                            "urn:ietf:params:netconf:capability:writable-running:1.0",
+                            "(urn:o-ran:ethernet-fwd:1.0?revision=2021-12-01)o-ran-ethernet-forwarding",
+                            "(urn:ietf:params:xml:ns:yang:ietf-x509-cert-to-name?revision=2014-12-10)ietf-x509-cert-to-name",
+                            "(urn:ietf:params:xml:ns:yang:ietf-restconf?revision=2017-01-26)ietf-restconf",
+                            "(urn:ietf:params:xml:ns:yang:ietf-yang-library?revision=2019-01-04)ietf-yang-library",
+                            "(urn:ietf:params:xml:ns:netconf:notification:1.0?revision=2008-07-14)notifications",
+                            "(urn:o-ran:fan:1.0?revision=2021-12-01)o-ran-fan",
+                            "(urn:o-ran:file-management:1.0?revision=2022-08-15)o-ran-file-management"
+                        ],
+                        "unavailable-capabilities": [
+                            "(urn:sysrepo:plugind?revision=2020-12-10)sysrepo-plugind"
+                        ]
+                    },
+                    "node-id": "O-RU-11223",
+                    "port": 41044,
+                    "status": "Connected"
+                }
+            ],
+            "pagination": {
+                "page": "1",
+                "size": 10,
+                "total": "4"
+            }
+        }
+    }
+}
+
+TASK [p1_deployment : Check fault messages in ODLUX] ***************************
+ok: [node1]
+
+TASK [p1_deployment : Show parsed fault message JSON] **************************
+ok: [node1] => {
+    "odlux_faults.json": {
+        "data-provider:output": {
+            "data": [
+                {
+                    "counter": 0,
+                    "id": "PRTNILACQ01M017DEV01/4af8681f-f2e4-4058-8052-4e9343ee7bf2/signalIsLost",
+                    "node-id": "PRTNILACQ01M017DEV01",
+                    "object-id": "4af8681f-f2e4-4058-8052-4e9343ee7bf2",
+                    "problem": "signalIsLost",
+                    "severity": "Critical",
+                    "timestamp": "2025-04-17T05:23:54.414Z"
+                },
+                {
+                    "counter": 0,
+                    "id": "O-RAN-FH-IPv6-01/4af8681f-f2e4-4058-8052-4e9343ee7bf2/LossOfSignalAlarm",
+                    "node-id": "O-RAN-FH-IPv6-01",
+                    "object-id": "4af8681f-f2e4-4058-8052-4e9343ee7bf2",
+                    "problem": "LossOfSignalAlarm",
+                    "severity": "Critical",
+                    "timestamp": "2025-04-17T05:23:54.479Z"
+                },
+                {
+                    "counter": 0,
+                    "id": "virtual33.myguest.virtualbox.org/northbound-interface/connectionLossNe",
+                    "node-id": "virtual33.myguest.virtualbox.org",
+                    "object-id": "northbound-interface",
+                    "problem": "connectionLossNe",
+                    "severity": "Major",
+                    "timestamp": "2025-04-17T05:23:54.616Z"
+                },
+                {
+                    "counter": 0,
+                    "id": "virtual33.myguest.virtualbox.org/connectionLossNe/connectionLossNe",
+                    "node-id": "virtual33.myguest.virtualbox.org",
+                    "object-id": "connectionLossNe",
+                    "problem": "connectionLossNe",
+                    "severity": "Major",
+                    "timestamp": "2025-04-17T05:23:57.730Z"
+                },
+                {
+                    "counter": 0,
+                    "id": "LKCYFL79Q01M01FYNG01/TCA/TCA",
+                    "node-id": "LKCYFL79Q01M01FYNG01",
+                    "object-id": "TCA",
+                    "problem": "TCA",
+                    "severity": "Major",
+                    "timestamp": "2025-04-17T05:23:55.051Z"
+                },
+                {
+                    "counter": 0,
+                    "id": "/HAAMRunningInLowerModulation/HAAMRunningInLowerModulation",
+                    "node-id": "",
+                    "object-id": "HAAMRunningInLowerModulation",
+                    "problem": "HAAMRunningInLowerModulation",
+                    "severity": "Major",
+                    "timestamp": "2025-04-17T05:23:57.219Z"
+                },
+                {
+                    "counter": 0,
+                    "id": "//HAAMRunningInLowerModulation",
+                    "node-id": "",
+                    "object-id": "",
+                    "problem": "HAAMRunningInLowerModulation",
+                    "severity": "Major",
+                    "timestamp": "2025-04-17T05:23:54.546Z"
+                },
+                {
+                    "counter": 0,
+                    "id": "NSHMRIACQ01M01pnf201/lossOfSignal/lossOfSignal",
+                    "node-id": "NSHMRIACQ01M01pnf201",
+                    "object-id": "lossOfSignal",
+                    "problem": "lossOfSignal",
+                    "severity": "Critical",
+                    "timestamp": "2025-04-17T05:23:54.694Z"
+                },
+                {
+                    "counter": 0,
+                    "id": "MMTSIL02Q01M01R2D201/TCA/TCA",
+                    "node-id": "MMTSIL02Q01M01R2D201",
+                    "object-id": "TCA",
+                    "problem": "TCA",
+                    "severity": "Minor",
+                    "timestamp": "2025-04-17T05:23:55.645Z"
+                },
+                {
+                    "counter": 0,
+                    "id": "NSHMRIACQ01M01pnf201/4af8681f-f2e4-4058-8052-4e9343ee7bf2/lossOfSignal",
+                    "node-id": "NSHMRIACQ01M01pnf201",
+                    "object-id": "4af8681f-f2e4-4058-8052-4e9343ee7bf2",
+                    "problem": "lossOfSignal",
+                    "severity": "Critical",
+                    "timestamp": "2025-04-17T05:23:54.063Z"
+                }
+            ],
+            "pagination": {
+                "page": "1",
+                "size": 10,
+                "total": "14"
+            }
+        }
+    }
+}
+
+PLAY RECAP *********************************************************************
+node1                      : ok=32   changed=9    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

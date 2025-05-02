@@ -1,0 +1,12 @@
+# Example playbook
+---
+- hosts: all
+  gather_facts: yes
+  become: true
+  vars:
+    python_packages:
+      - requests
+      - flask
+      - pandas
+  roles:
+    - role: p1_deployment
